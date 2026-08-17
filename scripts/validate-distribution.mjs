@@ -107,7 +107,9 @@ export async function validateDistribution(
     } catch {
       errors.push(display(root, manifestPath) + ": invalid JSON");
     }
-    if (manifest) {
+    if (manifest !== undefined && (manifest === null || Array.isArray(manifest) || typeof manifest !== "object")) {
+      errors.push(display(root, manifestPath) + ": manifest must be a JSON object");
+    } else if (manifest !== undefined) {
       if (manifest.name !== "ai-team-core") errors.push("Manifest name must be 'ai-team-core'");
       if (manifest.version !== "0.1.0") errors.push("Manifest version must be '0.1.0'");
       if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");

@@ -98,3 +98,20 @@ test("validator reports a malformed plugin manifest without throwing", async (t)
     "plugins/ai-team-core/.codex-plugin/plugin.json: invalid JSON",
   ]);
 });
+
+test("validator requires the plugin manifest to be a JSON object", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-non-object-manifest-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const manifestDirectory = path.join(root, "plugins/ai-team-core/.codex-plugin");
+  const manifestPath = path.join(manifestDirectory, "plugin.json");
+  await mkdir(manifestDirectory, { recursive: true });
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  for (const source of ["null", "false", "0", '\"\"', "[]"]) {
+    await writeFile(manifestPath, source, "utf8");
+    const errors = await validateDistribution(root, { requiredFiles: [] });
+    assert.deepEqual(errors, [
+      "plugins/ai-team-core/.codex-plugin/plugin.json: manifest must be a JSON object",
+    ]);
+  }
+});
