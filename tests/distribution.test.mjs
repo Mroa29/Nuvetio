@@ -220,6 +220,32 @@ test("validator reports missing relative HTML targets", async (t) => {
   ]);
 });
 
+test("validator requires an existing local favicon on each public HTML page", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-favicon-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const assets = path.join(root, "docs/assets");
+  await mkdir(assets, { recursive: true });
+  await writeFile(path.join(assets, "logo-ai-team-core-1024.png"), "png", "utf8");
+  await writeFile(
+    path.join(root, "docs/index.html"),
+    '<link rel="icon" type="image/png" href="./assets/logo-ai-team-core-1024.png">',
+    "utf8",
+  );
+  await writeFile(path.join(root, "docs/soporte.html"), "<title>Soporte</title>", "utf8");
+  await writeFile(
+    path.join(root, "docs/privacidad.html"),
+    '<link rel="icon" href="https://example.com/favicon.png">',
+    "utf8",
+  );
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  const errors = await validateDistribution(root, { requiredFiles: [] });
+  assert.deepEqual(errors, [
+    "docs/privacidad.html: missing local favicon declaration",
+    "docs/soporte.html: missing local favicon declaration",
+  ]);
+});
+
 test("validator reports drift from canonical public copy", async (t) => {
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-copy-"));
   t.after(() => rm(root, { recursive: true, force: true }));

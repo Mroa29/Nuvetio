@@ -130,6 +130,14 @@ function isOnePixel(value) {
   return /^1(?:\.0+)?(?:px)?$/i.test(value ?? "");
 }
 
+function hasLocalFavicon(source) {
+  return parseHtmlTags(source).some(({ name, attributes }) =>
+    name === "link" &&
+    (attributes.get("rel") ?? "").toLowerCase().split(/\s+/).includes("icon") &&
+    isLocalReference(attributes.get("href") ?? ""),
+  );
+}
+
 async function validateHtmlReferences(root, file, source, errors) {
   for (const { attributes } of parseHtmlTags(source)) {
     for (const attribute of ["href", "src"]) {
@@ -240,6 +248,9 @@ export async function validateDistribution(
   }
 
   const files = await collectFiles(root);
+  const requiresPublicFavicon = await exists(
+    path.join(root, "docs/assets/logo-ai-team-core-1024.png"),
+  );
   for (const file of files) {
     const relative = display(root, file);
     if (relative === "plugins/ai-team-core/.mcp.json") {
@@ -261,6 +272,13 @@ export async function validateDistribution(
     const source = await readFile(file, "utf8");
     await validateHtmlReferences(root, file, source, errors);
     validateHtmlSafety(root, file, source, errors);
+    if (
+      requiresPublicFavicon &&
+      display(root, file).startsWith("docs/") &&
+      !hasLocalFavicon(source)
+    ) {
+      errors.push(display(root, file) + ": missing local favicon declaration");
+    }
   }
   for (const file of files.filter((candidate) => path.extname(candidate) === ".css")) {
     validateCssSafety(root, file, await readFile(file, "utf8"), errors);
