@@ -20,6 +20,7 @@ Pregunta como siempre. AI Team Core organiza el trabajo como un equipo profesion
 - Para problema, usuario, propuesta de valor, alcance o uso responsable de IA, leer `references/product-and-ai.md`.
 - Para flujos, pantallas, wireframes, prototipos o mockups, leer `references/experience-and-mockups.md`.
 - Para arquitectura, implementación, pruebas, seguridad o lanzamiento, leer `references/delivery-and-quality.md`.
+- Cuando una consulta combina producto e IA con cómo se utilizará o diseñará la experiencia, combina `references/product-and-ai.md` y `references/experience-and-mockups.md`. En el entregable, incluir un flujo con entrada, decisiones, éxito y errores, o una ruta explícita para wireframe o mockup.
 
 ## Forma de respuesta
 

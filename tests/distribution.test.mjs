@@ -66,6 +66,30 @@ test("orchestration skill supports products, AI, mockups, delivery, and safe fal
   }
 });
 
+test("mixed beginner product requests also route to the experience lane", async () => {
+  const prompt = "Tengo una idea para crear un asistente con IA que ayude a nuestros clientes, pero no sé cómo diseñarlo. No modifiques archivos ni conectes servicios.";
+  const skill = await readFile(
+    path.join(ROOT, "plugins/ai-team-core/skills/operate-ai-team-core/SKILL.md"),
+    "utf8",
+  );
+
+  assert.match(prompt, /asistente con IA.*cómo diseñarlo/i);
+  assert.match(prompt, /No modifiques archivos ni conectes servicios\.$/);
+  assert.match(
+    skill,
+    /combina.*product-and-ai\.md.*experience-and-mockups\.md/i,
+    "mixed product and design requests must load both lanes",
+  );
+  assert.match(
+    skill,
+    /entrada.*decisiones.*éxito.*errores/i,
+    "the experience response must cover the essential flow states",
+  );
+  assert.match(skill, /Riesgos y supuestos/i);
+  assert.match(skill, /Siguiente paso/i);
+  assert.match(skill, /autorización aplicable/i);
+});
+
 test("site reuses the approved message and beginner installation flow", async () => {
   const copy = JSON.parse(
     await readFile(path.join(ROOT, "content/public-copy.es.json"), "utf8"),
