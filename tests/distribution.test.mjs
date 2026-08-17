@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -66,4 +67,20 @@ test("public package has no MCP configuration or external authentication require
     readFile(path.join(ROOT, "plugins/ai-team-core/.mcp.json"), "utf8"),
     { code: "ENOENT" },
   );
+});
+
+test("validator rejects MCP configuration and private project content", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-invalid-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(path.join(root, "plugins/ai-team-core"), { recursive: true });
+  await writeFile(path.join(root, "plugins/ai-team-core/.mcp.json"), "{}", "utf8");
+  const forbiddenTerm = ["ERP", "Kronos"].join(" ");
+  await writeFile(path.join(root, "internal.md"), forbiddenTerm + " private memory", "utf8");
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  const errors = await validateDistribution(root, { requiredFiles: [] });
+  assert.deepEqual(errors, [
+    "Forbidden file: plugins/ai-team-core/.mcp.json",
+    "internal.md: contains private distribution term '" + forbiddenTerm + "'",
+  ]);
 });
