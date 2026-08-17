@@ -1,0 +1,31 @@
+{
+  "tagline": "Pregunta como siempre. Construye como un equipo profesional.",
+  "summary": "AI Team Core convierte tus ideas y consultas en procesos claros de producto, diseño, inteligencia artificial e ingeniería. Tú explicas lo que necesitas con tus propias palabras; sus agentes te ayudan a analizarlo, mejorarlo y llevarlo a resultados concretos.",
+  "installSteps": [
+    "Abre la sección Plugins en ChatGPT o Codex.",
+    "Busca AI Team Core y abre su ficha.",
+    "Pulsa el botón + para instalarlo.",
+    "Inicia una conversación nueva y escribe tu consulta normalmente."
+  ],
+  "benefits": [
+    "Transforma ideas generales en objetivos y entregables claros.",
+    "Ayuda a desarrollar productos y funcionalidades con inteligencia artificial.",
+    "Diseña flujos, pantallas, wireframes y mockups.",
+    "Organiza arquitectura, tareas y planes de implementación.",
+    "Incorpora pruebas, calidad, seguridad y revisión de riesgos.",
+    "Mejora tus resultados sin obligarte a aprender prompting avanzado."
+  ],
+  "prompts": [
+    "Tengo una idea para un producto con IA. Ayúdame a definirlo y encontrar el primer paso.",
+    "Diseña el flujo y un mockup inicial para esta experiencia.",
+    "Analiza este problema del negocio y prepara un plan profesional para resolverlo."
+  ],
+  "example": {
+    "userPrompt": "Tengo una idea para crear un asistente con IA que ayude a nuestros clientes, pero no sé cómo diseñarlo.",
+    "outcome": "AI Team Core aclara el problema y el usuario, evalúa dónde aporta valor la IA, propone el flujo y las funcionalidades, desarrolla el concepto de las pantallas, revisa privacidad y seguridad, y prepara un plan con pruebas y criterios de éxito."
+  },
+  "troubleshooting": [
+    "Si no aparece, verifica que tu cuenta tenga acceso a Plugins.",
+    "Si ya lo instalaste, inicia una conversación nueva y comprueba que figure entre los plugins instalados."
+  ]
+}

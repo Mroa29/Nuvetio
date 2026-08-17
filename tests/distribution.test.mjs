@@ -62,6 +62,20 @@ test("orchestration skill supports products, AI, mockups, delivery, and safe fal
   }
 });
 
+test("site reuses the approved message and beginner installation flow", async () => {
+  const copy = JSON.parse(
+    await readFile(path.join(ROOT, "content/public-copy.es.json"), "utf8"),
+  );
+  const home = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
+  assert.equal(copy.tagline, "Pregunta como siempre. Construye como un equipo profesional.");
+  assert.equal(copy.installSteps.length, 4);
+  assert.equal(copy.benefits.length, 6);
+  assert.equal(copy.prompts.length, 3);
+  assert.match(home, new RegExp(copy.tagline.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  for (const step of copy.installSteps) assert.ok(home.includes(step));
+  assert.ok(home.includes(copy.example.userPrompt));
+});
+
 test("public package has no MCP configuration or external authentication requirement", async () => {
   await assert.rejects(
     readFile(path.join(ROOT, "plugins/ai-team-core/.mcp.json"), "utf8"),
@@ -114,4 +128,64 @@ test("validator requires the plugin manifest to be a JSON object", async (t) => 
       "plugins/ai-team-core/.codex-plugin/plugin.json: manifest must be a JSON object",
     ]);
   }
+});
+
+test("validator reports missing relative HTML targets", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-links-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(path.join(root, "docs"), { recursive: true });
+  await writeFile(
+    path.join(root, "docs/index.html"),
+    '<link rel="stylesheet" href="./styles.css">',
+    "utf8",
+  );
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  const errors = await validateDistribution(root, { requiredFiles: [] });
+  assert.deepEqual(errors, [
+    "docs/index.html: missing link target './styles.css'",
+  ]);
+});
+
+test("validator reports drift from canonical public copy", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-copy-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(path.join(root, "content"), { recursive: true });
+  await mkdir(path.join(root, "docs"), { recursive: true });
+  await writeFile(
+    path.join(root, "content/public-copy.es.json"),
+    JSON.stringify({
+      tagline: "Approved tagline",
+      installSteps: ["Install"],
+      benefits: ["Benefit"],
+      prompts: ["Prompt"],
+      example: { userPrompt: "Question", outcome: "Outcome" },
+    }),
+    "utf8",
+  );
+  await writeFile(path.join(root, "docs/index.html"), "<h1>Stale copy</h1>", "utf8");
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  const errors = await validateDistribution(root, { requiredFiles: [] });
+  assert.deepEqual(errors, [
+    "docs/index.html: approved public copy is out of date",
+  ]);
+});
+
+test("validator rejects remote scripts, insecure assets, analytics, and tracking pixels", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-tracking-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(path.join(root, "docs"), { recursive: true });
+  await writeFile(
+    path.join(root, "docs/index.html"),
+    '<img src="http://example.com/pixel.gif" width="1" height="1"><script src="https://example.com/remote.js"></script><p>google-analytics</p>',
+    "utf8",
+  );
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  const errors = await validateDistribution(root, { requiredFiles: [] });
+  assert.ok(errors.some((error) => error.includes("insecure remote asset")));
+  assert.ok(errors.some((error) => error.includes("remote script")));
+  assert.ok(errors.some((error) => error.includes("analytics")));
+  assert.ok(errors.some((error) => error.includes("tracking pixel")));
 });

@@ -7,6 +7,14 @@ export const REQUIRED_FILES = [
   ".agents/plugins/marketplace.json",
   ".github/workflows/validate.yml",
   "LICENSE",
+  "README.md",
+  "content/public-copy.es.json",
+  "docs/assets/logo-ai-team-core-1024.png",
+  "docs/index.html",
+  "docs/privacidad.html",
+  "docs/soporte.html",
+  "docs/styles.css",
+  "docs/terminos.html",
   "package.json",
   "plugins/ai-team-core/.codex-plugin/plugin.json",
   "plugins/ai-team-core/README.md",
@@ -32,6 +40,11 @@ const PRIVATE_TERMS = [
   ["memory", "decisions"].join("/"),
   ["socra", "OneDrive"].join("\\"),
 ];
+const HTML_REFERENCE_PATTERN = /\b(?:href|src)\s*=\s*(["'])(.*?)\1/gi;
+const INSECURE_REMOTE_ASSET_PATTERN = /<(?:img|link|source|video|audio)\b[^>]*\b(?:src|href)\s*=\s*["']http:\/\//i;
+const REMOTE_SCRIPT_PATTERN = /<script\b[^>]*\bsrc\s*=\s*["'](?:https?:)?\/\//i;
+const ANALYTICS_PATTERN = /google-analytics|googletagmanager|gtag\s*\(|mixpanel|segment\.com|amplitude/i;
+const TRACKING_PIXEL_PATTERN = /<img\b(?=[^>]*\bwidth\s*=\s*["']?1(?:px)?["']?)(?=[^>]*\bheight\s*=\s*["']?1(?:px)?["']?)[^>]*>/i;
 
 async function exists(target) {
   try {
@@ -72,6 +85,79 @@ function parseFrontmatter(source) {
   );
 }
 
+function isLocalReference(reference) {
+  return !(
+    reference === "" ||
+    reference.startsWith("#") ||
+    reference.startsWith("/") ||
+    reference.startsWith("//") ||
+    /^[a-z][a-z\d+.-]*:/i.test(reference)
+  );
+}
+
+async function validateHtmlReferences(root, file, source, errors) {
+  HTML_REFERENCE_PATTERN.lastIndex = 0;
+  for (const match of source.matchAll(HTML_REFERENCE_PATTERN)) {
+    const reference = match[2];
+    if (!isLocalReference(reference)) continue;
+    const cleanReference = reference.split(/[?#]/, 1)[0];
+    const target = path.resolve(path.dirname(file), cleanReference);
+    if (!(await exists(target))) {
+      errors.push(display(root, file) + ": missing link target '" + reference + "'");
+    }
+  }
+}
+
+function validateHtmlSafety(root, file, source, errors) {
+  const relative = display(root, file);
+  if (INSECURE_REMOTE_ASSET_PATTERN.test(source)) {
+    errors.push(relative + ": contains insecure remote asset");
+  }
+  if (REMOTE_SCRIPT_PATTERN.test(source)) {
+    errors.push(relative + ": contains remote script");
+  }
+  if (ANALYTICS_PATTERN.test(source)) {
+    errors.push(relative + ": contains analytics integration");
+  }
+  if (TRACKING_PIXEL_PATTERN.test(source)) {
+    errors.push(relative + ": contains tracking pixel");
+  }
+}
+
+async function validateApprovedPublicCopy(root, errors) {
+  const copyPath = path.join(root, "content/public-copy.es.json");
+  const homePath = path.join(root, "docs/index.html");
+  if (!(await exists(copyPath)) || !(await exists(homePath))) return;
+
+  let copy;
+  try {
+    copy = JSON.parse(await readFile(copyPath, "utf8"));
+  } catch {
+    errors.push("content/public-copy.es.json: invalid JSON");
+    return;
+  }
+
+  const home = await readFile(homePath, "utf8");
+  const approved = [
+    copy?.tagline,
+    ...(Array.isArray(copy?.installSteps) ? copy.installSteps : []),
+    ...(Array.isArray(copy?.benefits) ? copy.benefits : []),
+    ...(Array.isArray(copy?.prompts) ? copy.prompts : []),
+    copy?.example?.userPrompt,
+    copy?.example?.outcome,
+  ];
+  const hasExpectedShape =
+    typeof copy?.tagline === "string" &&
+    Array.isArray(copy?.installSteps) &&
+    Array.isArray(copy?.benefits) &&
+    Array.isArray(copy?.prompts) &&
+    typeof copy?.example?.userPrompt === "string" &&
+    typeof copy?.example?.outcome === "string";
+  if (!hasExpectedShape || !approved.every((value) => home.includes(value))) {
+    errors.push("docs/index.html: approved public copy is out of date");
+  }
+}
+
 export async function validateDistribution(
   root,
   { requiredFiles = REQUIRED_FILES } = {},
@@ -98,6 +184,13 @@ export async function validateDistribution(
       }
     }
   }
+
+  for (const file of files.filter((candidate) => path.extname(candidate) === ".html")) {
+    const source = await readFile(file, "utf8");
+    await validateHtmlReferences(root, file, source, errors);
+    validateHtmlSafety(root, file, source, errors);
+  }
+  await validateApprovedPublicCopy(root, errors);
 
   const manifestPath = path.join(root, "plugins/ai-team-core/.codex-plugin/plugin.json");
   if (await exists(manifestPath)) {

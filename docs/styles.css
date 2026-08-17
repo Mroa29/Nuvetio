@@ -1,0 +1,43 @@
+:root {
+  color-scheme: light;
+  --navy: #081632;
+  --blue: #155eef;
+  --teal: #36cfc9;
+  --surface: #f6f8fc;
+  --white: #ffffff;
+  --text: #14213d;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; color: var(--text); background: var(--white); font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+a { color: var(--blue); }
+a:focus-visible, .button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.hero { color: var(--white); background: radial-gradient(circle at 80% 20%, #155eef 0, var(--navy) 48%); padding: 0 1.25rem 5rem; }
+nav, main, .hero__content, footer { width: min(68rem, 100%); margin-inline: auto; }
+nav { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; }
+nav a { color: inherit; }
+.brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 800; text-decoration: none; }
+.brand img { border-radius: .6rem; }
+.hero__content { padding-top: 4rem; }
+.hero--compact { padding-bottom: 2.5rem; }
+.hero--compact .hero__content { padding-top: 1.5rem; }
+.eyebrow { color: var(--teal); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+h1 { max-width: 16ch; margin: .25rem 0 1rem; font-size: clamp(2.5rem, 7vw, 5rem); line-height: 1.02; }
+h2 { color: var(--navy); font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.15; }
+.lead { max-width: 46rem; font-size: 1.2rem; }
+.actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+.button { display: inline-block; padding: .8rem 1.1rem; color: var(--navy); background: var(--teal); border-radius: .65rem; font-weight: 800; text-decoration: none; }
+.button--secondary { color: var(--white); background: transparent; border: 1px solid #ffffff80; }
+main { padding: 2rem 1.25rem 4rem; }
+section { padding-block: 2rem; }
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+article, .example, .steps li { background: var(--surface); border: 1px solid #dbe3f0; border-radius: .85rem; padding: 1rem; }
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 0; list-style-position: inside; }
+blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 4px solid var(--blue); font-size: 1.1rem; }
+footer { display: flex; justify-content: space-between; gap: 1rem; padding: 2rem 1.25rem; border-top: 1px solid #dbe3f0; }
+footer nav { width: auto; margin: 0; padding: 0; }
+@media (max-width: 720px) {
+  .hero__content { padding-top: 2rem; }
+  .grid, .steps { grid-template-columns: 1fr; }
+  footer { flex-direction: column; }
+}
