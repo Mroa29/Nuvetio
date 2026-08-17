@@ -88,6 +88,21 @@ test("mixed beginner product requests also route to the experience lane", async 
   assert.match(skill, /Riesgos y supuestos/i);
   assert.match(skill, /Siguiente paso/i);
   assert.match(skill, /autorización aplicable/i);
+  assert.match(
+    skill,
+    /no detenerse solo en una aclaración.*borrador provisional/i,
+    "mixed beginner requests must continue beyond clarification when enough context exists",
+  );
+  assert.match(
+    skill,
+    /supuestos razonables.*etiquetados/i,
+    "the provisional response must disclose its assumptions",
+  );
+  assert.match(
+    skill,
+    /al final.*al menos una pregunta concreta.*siguiente paso/i,
+    "the response must end with a concrete next-step question",
+  );
 });
 
 test("site reuses the approved message and beginner installation flow", async () => {
