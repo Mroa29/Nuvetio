@@ -25,7 +25,13 @@ export const REQUIRED_FILES = [
   "plugins/ai-team-core/skills/operate-ai-team-core/references/experience-and-mockups.md",
   "plugins/ai-team-core/skills/operate-ai-team-core/references/delivery-and-quality.md",
   "scripts/validate-distribution.mjs",
+  "submission/checklist.md",
+  "submission/listing.es.md",
+  "submission/release-notes.md",
+  "submission/starter-prompts.es.json",
+  "submission/test-cases.json",
   "tests/distribution.test.mjs",
+  "tests/submission.test.mjs",
 ];
 
 const IGNORED = new Set([".git", "node_modules", "coverage", "dist", "build"]);
