@@ -30,3 +30,40 @@ test("public manifest and marketplace expose a skills-only AI Team Core plugin",
     category: "Developer Tools",
   });
 });
+
+test("orchestration skill supports products, AI, mockups, delivery, and safe fallbacks", async () => {
+  const skill = await readFile(
+    path.join(ROOT, "plugins/ai-team-core/skills/operate-ai-team-core/SKILL.md"),
+    "utf8",
+  );
+  assert.match(skill, /^---\r?\nname: operate-ai-team-core\r?\n/m);
+  assert.match(skill, /pregunta como siempre/i);
+  assert.match(skill, /product-and-ai\.md/);
+  assert.match(skill, /experience-and-mockups\.md/);
+  assert.match(skill, /delivery-and-quality\.md/);
+  assert.match(skill, /wireframe textual/i);
+  assert.match(skill, /autorizaci[oó]n/i);
+
+  for (const file of [
+    "product-and-ai.md",
+    "experience-and-mockups.md",
+    "delivery-and-quality.md",
+  ]) {
+    const source = await readFile(
+      path.join(
+        ROOT,
+        "plugins/ai-team-core/skills/operate-ai-team-core/references",
+        file,
+      ),
+      "utf8",
+    );
+    assert.ok(source.length > 300, file + " must contain an actionable workflow");
+  }
+});
+
+test("public package has no MCP configuration or external authentication requirement", async () => {
+  await assert.rejects(
+    readFile(path.join(ROOT, "plugins/ai-team-core/.mcp.json"), "utf8"),
+    { code: "ENOENT" },
+  );
+});
