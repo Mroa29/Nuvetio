@@ -101,11 +101,18 @@ export async function validateDistribution(
 
   const manifestPath = path.join(root, "plugins/ai-team-core/.codex-plugin/plugin.json");
   if (await exists(manifestPath)) {
-    const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-    if (manifest.name !== "ai-team-core") errors.push("Manifest name must be 'ai-team-core'");
-    if (manifest.version !== "0.1.0") errors.push("Manifest version must be '0.1.0'");
-    if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
-    if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
+    let manifest;
+    try {
+      manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+    } catch {
+      errors.push(display(root, manifestPath) + ": invalid JSON");
+    }
+    if (manifest) {
+      if (manifest.name !== "ai-team-core") errors.push("Manifest name must be 'ai-team-core'");
+      if (manifest.version !== "0.1.0") errors.push("Manifest version must be '0.1.0'");
+      if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
+      if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
+    }
   }
 
   for (const file of files.filter((candidate) => path.basename(candidate) === "SKILL.md")) {

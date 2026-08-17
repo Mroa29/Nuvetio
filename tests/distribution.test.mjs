@@ -84,3 +84,17 @@ test("validator rejects MCP configuration and private project content", async (t
     "internal.md: contains private distribution term '" + forbiddenTerm + "'",
   ]);
 });
+
+test("validator reports a malformed plugin manifest without throwing", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-invalid-manifest-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const manifestDirectory = path.join(root, "plugins/ai-team-core/.codex-plugin");
+  await mkdir(manifestDirectory, { recursive: true });
+  await writeFile(path.join(manifestDirectory, "plugin.json"), "{ invalid json", "utf8");
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  const errors = await validateDistribution(root, { requiredFiles: [] });
+  assert.deepEqual(errors, [
+    "plugins/ai-team-core/.codex-plugin/plugin.json: invalid JSON",
+  ]);
+});
