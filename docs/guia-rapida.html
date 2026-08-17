@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Guía rápida para instalar y comenzar a usar AI Team Core.">
+  <title>Guía rápida de AI Team Core</title>
+  <style>
+    @page { size: A4; margin: 10mm; }
+    :root {
+      --navy: #081632;
+      --blue: #155eef;
+      --teal: #36cfc9;
+      --surface: #f6f8fc;
+      --line: #dbe3f0;
+      --text: #14213d;
+      --white: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    html { background: #e9eef7; }
+    body {
+      width: 190mm;
+      min-height: 277mm;
+      margin: 0 auto;
+      color: var(--text);
+      background: var(--white);
+      font: 9.5pt/1.28 "Segoe UI", Arial, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    a { color: var(--blue); text-decoration: underline; text-underline-offset: 1.5pt; }
+    h1, h2, p, ol, ul, blockquote { margin-top: 0; }
+    h1 { margin-bottom: 1.4mm; font-size: 21pt; line-height: 1.05; letter-spacing: -.35pt; }
+    h2 {
+      margin-bottom: 2mm;
+      color: var(--navy);
+      font-size: 12.5pt;
+      line-height: 1.1;
+    }
+    p { margin-bottom: 0; }
+    .guide-header {
+      display: grid;
+      grid-template-columns: 18mm 1fr;
+      gap: 5mm;
+      align-items: center;
+      min-height: 32mm;
+      padding: 5mm 6mm;
+      color: var(--white);
+      background: radial-gradient(circle at 88% 16%, var(--blue) 0, var(--navy) 54%);
+      border-radius: 4mm;
+    }
+    .guide-header img { width: 18mm; height: 18mm; border-radius: 3mm; }
+    .product-name {
+      margin-bottom: 1.4mm;
+      color: #bffcf7;
+      font-size: 9.5pt;
+      font-weight: 800;
+      letter-spacing: .8pt;
+      text-transform: uppercase;
+    }
+    .intro { font-size: 9.5pt; opacity: .94; }
+    main { padding-top: 4mm; }
+    section { margin-bottom: 3.1mm; }
+    .steps,
+    .benefits,
+    .prompts { display: grid; gap: 2.2mm; margin: 0; padding: 0; list-style: none; }
+    .steps { grid-template-columns: repeat(2, 1fr); counter-reset: step; }
+    .steps li {
+      position: relative;
+      min-height: 23mm;
+      padding: 3mm 3mm 2.6mm 11mm;
+      background: var(--surface);
+      border: .3mm solid var(--line);
+      border-radius: 2.6mm;
+      break-inside: avoid;
+    }
+    .steps li::before {
+      position: absolute;
+      top: 3mm;
+      left: 3mm;
+      display: grid;
+      place-items: center;
+      width: 6mm;
+      height: 6mm;
+      color: var(--white);
+      background: var(--blue);
+      border-radius: 50%;
+      content: counter(step);
+      counter-increment: step;
+      font-weight: 800;
+    }
+    .surface-note {
+      margin-top: 2mm;
+      padding: 2mm 3mm;
+      color: #17305e;
+      background: #eaf1ff;
+      border-left: 1mm solid var(--blue);
+      border-radius: 1.5mm;
+      font-size: 9.5pt;
+    }
+    .benefits { grid-template-columns: repeat(2, 1fr); }
+    .benefits li {
+      position: relative;
+      min-height: 10.7mm;
+      padding: 2.3mm 2.5mm 2.3mm 8.5mm;
+      border: .3mm solid var(--line);
+      border-radius: 2.3mm;
+    }
+    .benefits li::before {
+      position: absolute;
+      top: 2.2mm;
+      left: 2.7mm;
+      color: #087f7a;
+      content: "✓";
+      font-weight: 900;
+    }
+    .prompts { grid-template-columns: repeat(3, 1fr); }
+    .prompts li {
+      min-height: 23mm;
+      padding: 2.8mm;
+      background: var(--surface);
+      border: .3mm solid var(--line);
+      border-top: 1.2mm solid var(--teal);
+      border-radius: 2.3mm;
+      font-style: italic;
+    }
+    .support {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
+      padding: 3mm;
+      background: #eef3fb;
+      border-radius: 2.5mm;
+    }
+    .support h2 { grid-column: 1 / -1; margin-bottom: 0; }
+    .support p { padding-left: 4mm; position: relative; }
+    .support p::before { position: absolute; left: 0; color: var(--blue); content: "•"; font-weight: 900; }
+    .support-link { grid-column: 1 / -1; font-weight: 700; }
+    .example {
+      margin-bottom: 0;
+      padding: 3.5mm 4mm;
+      color: var(--white);
+      background: var(--navy);
+      border-radius: 3mm;
+      break-inside: avoid;
+    }
+    .example h2 { color: #bffcf7; }
+    .example blockquote {
+      margin-bottom: 2mm;
+      padding-left: 3mm;
+      border-left: 1mm solid var(--teal);
+      font-weight: 700;
+    }
+    .example strong { color: #bffcf7; }
+    @media print {
+      html { background: var(--white); }
+      body { width: auto; min-height: auto; }
+      a { color: var(--blue) !important; }
+      .example a { color: #bffcf7 !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="guide-header">
+    <img src="./assets/logo-ai-team-core-1024.png" width="68" height="68" alt="Logo de AI Team Core">
+    <div>
+      <p class="product-name">AI Team Core · Guía rápida</p>
+      <h1>Pregunta como siempre. Construye como un equipo profesional.</h1>
+      <p class="intro">Instálalo una vez y comienza con una consulta normal. AI Team Core coordina capacidades de producto, diseño, IA e ingeniería para ayudarte a llegar a resultados concretos.</p>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>1. Instala AI Team Core en cuatro pasos</h2>
+      <ol class="steps">
+        <li>En ChatGPT web o en la app de escritorio, abre la pestaña Plugins para entrar en el directorio.</li>
+        <li>Busca AI Team Core, abre su ficha y pulsa el botón + para instalarlo.</li>
+        <li>Si usas Codex CLI, escribe /plugins, busca AI Team Core e instálalo desde el navegador de plugins. La extensión IDE de Codex no admite plugins.</li>
+        <li>Después de instalarlo, inicia un chat nuevo en ChatGPT o una sesión nueva en Codex CLI y escribe tu consulta normalmente.</li>
+      </ol>
+      <p class="surface-note"><strong>Recuerda:</strong> en ChatGPT se instala desde Plugins en web o escritorio; en Codex se instala desde <strong>Codex CLI</strong>. La extensión IDE de Codex no admite plugins.</p>
+    </section>
+
+    <section>
+      <h2>2. Lo que puedes conseguir</h2>
+      <ul class="benefits">
+        <li>Transforma ideas generales en objetivos y entregables claros.</li>
+        <li>Ayuda a desarrollar productos y funcionalidades con inteligencia artificial.</li>
+        <li>Diseña flujos, pantallas, wireframes y mockups.</li>
+        <li>Organiza arquitectura, tareas y planes de implementación.</li>
+        <li>Incorpora pruebas, calidad, seguridad y revisión de riesgos.</li>
+        <li>Mejora tus resultados sin obligarte a aprender prompting avanzado.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Empieza con uno de estos mensajes</h2>
+      <ul class="prompts">
+        <li>“Tengo una idea para un producto con IA. Ayúdame a definirlo y encontrar el primer paso.”</li>
+        <li>“Diseña el flujo y un mockup inicial para esta experiencia.”</li>
+        <li>“Analiza este problema del negocio y prepara un plan profesional para resolverlo.”</li>
+      </ul>
+    </section>
+
+    <section class="support">
+      <h2>Si algo no aparece</h2>
+      <p>En ChatGPT web o en la app de escritorio, verifica que tu cuenta tenga acceso a la pestaña Plugins.</p>
+      <p>En Codex CLI, escribe /plugins para abrir el navegador. La extensión IDE de Codex no admite plugins.</p>
+      <p class="support-link">Ayuda: <a href="https://mroa29.github.io/AI-Team-Core-Plugin/soporte.html">https://mroa29.github.io/AI-Team-Core-Plugin/soporte.html</a></p>
+    </section>
+
+    <section class="example">
+      <h2>Ejemplo final: crea un asistente con IA</h2>
+      <blockquote>“Tengo una idea para crear un asistente con IA que ayude a nuestros clientes, pero no sé cómo diseñarlo.”</blockquote>
+      <p><strong>Resultado:</strong> AI Team Core aclara el problema y el usuario, evalúa dónde aporta valor la IA, propone el flujo y las funcionalidades, desarrolla el concepto de las pantallas, revisa privacidad y seguridad, y prepara un plan con pruebas y criterios de éxito.</p>
+    </section>
+  </main>
+</body>
+</html>

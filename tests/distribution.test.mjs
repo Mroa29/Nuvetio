@@ -343,3 +343,37 @@ test("validator requires manifest starter prompts to use canonical public copy",
   const errors = await validateDistribution(root, { requiredFiles: [] });
   assert.deepEqual(errors, ["Manifest defaultPrompt must use approved starter prompts"]);
 });
+
+test("downloadable guide is a single-page PDF", async () => {
+  const pdf = await readFile(
+    path.join(ROOT, "docs/downloads/guia-rapida-ai-team-core.pdf"),
+  );
+  assert.equal(pdf.subarray(0, 5).toString("ascii"), "%PDF-");
+  const source = pdf.toString("latin1");
+  const pages = [...source.matchAll(/\/Type\s*\/Page\b/g)];
+  assert.equal(pages.length, 1);
+});
+
+test("validator rejects invalid and multi-page downloadable guides", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-pdf-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const downloads = path.join(root, "docs/downloads");
+  const guide = path.join(downloads, "guia-rapida-ai-team-core.pdf");
+  await mkdir(downloads, { recursive: true });
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+
+  await writeFile(guide, "not a PDF", "latin1");
+  assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
+    "docs/downloads/guia-rapida-ai-team-core.pdf: invalid PDF header",
+  ]);
+
+  await writeFile(
+    guide,
+    "%PDF-1.7\n/Type /Page\n/Type /Page\n",
+    "latin1",
+  );
+  assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
+    "docs/downloads/guia-rapida-ai-team-core.pdf: must contain exactly one page (found 2)",
+  ]);
+});

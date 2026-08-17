@@ -10,6 +10,8 @@ export const REQUIRED_FILES = [
   "README.md",
   "content/public-copy.es.json",
   "docs/assets/logo-ai-team-core-1024.png",
+  "docs/downloads/guia-rapida-ai-team-core.pdf",
+  "docs/guia-rapida.html",
   "docs/index.html",
   "docs/privacidad.html",
   "docs/soporte.html",
@@ -204,6 +206,24 @@ async function validateApprovedPublicCopy(root, errors) {
   }
 }
 
+async function validateDownloadableGuide(root, errors) {
+  const guidePath = path.join(root, "docs/downloads/guia-rapida-ai-team-core.pdf");
+  if (!(await exists(guidePath))) return;
+
+  const pdf = await readFile(guidePath);
+  const relative = display(root, guidePath);
+  if (pdf.subarray(0, 5).toString("ascii") !== "%PDF-") {
+    errors.push(relative + ": invalid PDF header");
+    return;
+  }
+
+  const source = pdf.toString("latin1");
+  const pageCount = [...source.matchAll(/\/Type\s*\/Page\b/g)].length;
+  if (pageCount !== 1) {
+    errors.push(relative + ": must contain exactly one page (found " + pageCount + ")");
+  }
+}
+
 export async function validateDistribution(
   root,
   { requiredFiles = REQUIRED_FILES } = {},
@@ -240,6 +260,7 @@ export async function validateDistribution(
     validateCssSafety(root, file, await readFile(file, "utf8"), errors);
   }
   await validateApprovedPublicCopy(root, errors);
+  await validateDownloadableGuide(root, errors);
 
   const manifestPath = path.join(root, "plugins/ai-team-core/.codex-plugin/plugin.json");
   if (await exists(manifestPath)) {
