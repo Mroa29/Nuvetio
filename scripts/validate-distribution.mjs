@@ -40,11 +40,11 @@ const PRIVATE_TERMS = [
   ["memory", "decisions"].join("/"),
   ["socra", "OneDrive"].join("\\"),
 ];
-const HTML_REFERENCE_PATTERN = /\b(?:href|src)\s*=\s*(["'])(.*?)\1/gi;
-const INSECURE_REMOTE_ASSET_PATTERN = /<(?:img|link|source|video|audio)\b[^>]*\b(?:src|href)\s*=\s*["']http:\/\//i;
-const REMOTE_SCRIPT_PATTERN = /<script\b[^>]*\bsrc\s*=\s*["'](?:https?:)?\/\//i;
+const HTML_TAG_PATTERN = /<([a-z][\w:-]*)\b((?:"[^"]*"|'[^']*'|[^'">])*)>/gi;
+const HTML_ATTRIBUTE_PATTERN = /\b([a-z_:][\w:.-]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/gi;
+const HTML_ASSET_ELEMENTS = new Set(["audio", "embed", "iframe", "img", "link", "source", "video"]);
+const CSS_INSECURE_REMOTE_ASSET_PATTERN = /url\(\s*(?:["']\s*)?http:\/\//i;
 const ANALYTICS_PATTERN = /google-analytics|googletagmanager|gtag\s*\(|mixpanel|segment\.com|amplitude/i;
-const TRACKING_PIXEL_PATTERN = /<img\b(?=[^>]*\bwidth\s*=\s*["']?1(?:px)?["']?)(?=[^>]*\bheight\s*=\s*["']?1(?:px)?["']?)[^>]*>/i;
 
 async function exists(target) {
   try {
@@ -95,32 +95,77 @@ function isLocalReference(reference) {
   );
 }
 
+function parseHtmlAttributes(source) {
+  const attributes = new Map();
+  HTML_ATTRIBUTE_PATTERN.lastIndex = 0;
+  for (const match of source.matchAll(HTML_ATTRIBUTE_PATTERN)) {
+    attributes.set(match[1].toLowerCase(), match[2] ?? match[3] ?? match[4]);
+  }
+  return attributes;
+}
+
+function parseHtmlTags(source) {
+  HTML_TAG_PATTERN.lastIndex = 0;
+  return [...source.matchAll(HTML_TAG_PATTERN)].map((match) => ({
+    name: match[1].toLowerCase(),
+    attributes: parseHtmlAttributes(match[2]),
+  }));
+}
+
+function inlineStyleValue(style, property) {
+  const match = style.match(new RegExp("(?:^|;)\\s*" + property + "\\s*:\\s*([^;]+)", "i"));
+  return match?.[1].replace(/\s*!important\s*$/i, "").trim();
+}
+
+function isOnePixel(value) {
+  return /^1(?:\.0+)?(?:px)?$/i.test(value ?? "");
+}
+
 async function validateHtmlReferences(root, file, source, errors) {
-  HTML_REFERENCE_PATTERN.lastIndex = 0;
-  for (const match of source.matchAll(HTML_REFERENCE_PATTERN)) {
-    const reference = match[2];
-    if (!isLocalReference(reference)) continue;
-    const cleanReference = reference.split(/[?#]/, 1)[0];
-    const target = path.resolve(path.dirname(file), cleanReference);
-    if (!(await exists(target))) {
-      errors.push(display(root, file) + ": missing link target '" + reference + "'");
+  for (const { attributes } of parseHtmlTags(source)) {
+    for (const attribute of ["href", "src"]) {
+      const reference = attributes.get(attribute);
+      if (reference === undefined || !isLocalReference(reference)) continue;
+      const cleanReference = reference.split(/[?#]/, 1)[0];
+      const target = path.resolve(path.dirname(file), cleanReference);
+      if (!(await exists(target))) {
+        errors.push(display(root, file) + ": missing link target '" + reference + "'");
+      }
     }
   }
 }
 
 function validateHtmlSafety(root, file, source, errors) {
   const relative = display(root, file);
-  if (INSECURE_REMOTE_ASSET_PATTERN.test(source)) {
-    errors.push(relative + ": contains insecure remote asset");
+  let hasInsecureRemoteAsset = false;
+  let hasRemoteScript = false;
+  let hasTrackingPixel = false;
+  for (const { name, attributes } of parseHtmlTags(source)) {
+    const references = [attributes.get("href"), attributes.get("src")].filter(Boolean);
+    if (HTML_ASSET_ELEMENTS.has(name) && references.some((value) => /^http:\/\//i.test(value))) {
+      hasInsecureRemoteAsset = true;
+    }
+    if (name === "script" && /^(?:https?:)?\/\//i.test(attributes.get("src") ?? "")) {
+      hasRemoteScript = true;
+    }
+    if (name === "img") {
+      const style = attributes.get("style") ?? "";
+      const width = inlineStyleValue(style, "width") ?? attributes.get("width");
+      const height = inlineStyleValue(style, "height") ?? attributes.get("height");
+      if (isOnePixel(width) && isOnePixel(height)) hasTrackingPixel = true;
+    }
   }
-  if (REMOTE_SCRIPT_PATTERN.test(source)) {
-    errors.push(relative + ": contains remote script");
-  }
+  if (hasInsecureRemoteAsset) errors.push(relative + ": contains insecure remote asset");
+  if (hasRemoteScript) errors.push(relative + ": contains remote script");
   if (ANALYTICS_PATTERN.test(source)) {
     errors.push(relative + ": contains analytics integration");
   }
-  if (TRACKING_PIXEL_PATTERN.test(source)) {
-    errors.push(relative + ": contains tracking pixel");
+  if (hasTrackingPixel) errors.push(relative + ": contains tracking pixel");
+}
+
+function validateCssSafety(root, file, source, errors) {
+  if (CSS_INSECURE_REMOTE_ASSET_PATTERN.test(source)) {
+    errors.push(display(root, file) + ": contains insecure remote asset");
   }
 }
 
@@ -190,6 +235,9 @@ export async function validateDistribution(
     await validateHtmlReferences(root, file, source, errors);
     validateHtmlSafety(root, file, source, errors);
   }
+  for (const file of files.filter((candidate) => path.extname(candidate) === ".css")) {
+    validateCssSafety(root, file, await readFile(file, "utf8"), errors);
+  }
   await validateApprovedPublicCopy(root, errors);
 
   const manifestPath = path.join(root, "plugins/ai-team-core/.codex-plugin/plugin.json");
@@ -207,6 +255,21 @@ export async function validateDistribution(
       if (manifest.version !== "0.1.0") errors.push("Manifest version must be '0.1.0'");
       if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
       if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
+      const copyPath = path.join(root, "content/public-copy.es.json");
+      if (await exists(copyPath)) {
+        let copy;
+        try {
+          copy = JSON.parse(await readFile(copyPath, "utf8"));
+        } catch {
+          copy = undefined;
+        }
+        if (
+          Array.isArray(copy?.prompts) &&
+          JSON.stringify(manifest.interface?.defaultPrompt) !== JSON.stringify(copy.prompts)
+        ) {
+          errors.push("Manifest defaultPrompt must use approved starter prompts");
+        }
+      }
     }
   }
 

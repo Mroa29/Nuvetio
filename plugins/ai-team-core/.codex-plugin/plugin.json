@@ -33,9 +33,9 @@
     ],
     "websiteURL": "https://mroa29.github.io/AI-Team-Core-Plugin/",
     "defaultPrompt": [
-      "Ayúdame a convertir esta idea en un producto con IA.",
-      "Diseña el flujo y el mockup inicial de esta experiencia.",
-      "Analiza este problema y dame un plan profesional para resolverlo."
+      "Tengo una idea para un producto con IA. Ayúdame a definirlo y encontrar el primer paso.",
+      "Diseña el flujo y un mockup inicial para esta experiencia.",
+      "Analiza este problema del negocio y prepara un plan profesional para resolverlo."
     ],
     "brandColor": "#155EEF"
   }

@@ -8,7 +8,10 @@ Sitio público: <https://mroa29.github.io/AI-Team-Core-Plugin/>
 
 ## Para usuarios
 
-Instala AI Team Core desde la sección **Plugins** de ChatGPT o Codex. Este repositorio es el paquete técnico público y no es el flujo de instalación recomendado para usuarios finales.
+- En ChatGPT web o en la app de escritorio, abre la pestaña **Plugins**, busca AI Team Core, abre su ficha y pulsa el botón **+**.
+- En Codex CLI, escribe `/plugins`, busca AI Team Core e instálalo desde el navegador de plugins.
+
+La extensión IDE de Codex no admite plugins. Después de instalar AI Team Core, inicia un chat o una sesión nueva. Este repositorio es el paquete técnico público y no es el flujo de instalación recomendado para usuarios finales.
 
 ## Para colaboradores
 
