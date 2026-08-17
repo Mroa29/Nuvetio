@@ -99,7 +99,8 @@ function parseHtmlAttributes(source) {
   const attributes = new Map();
   HTML_ATTRIBUTE_PATTERN.lastIndex = 0;
   for (const match of source.matchAll(HTML_ATTRIBUTE_PATTERN)) {
-    attributes.set(match[1].toLowerCase(), match[2] ?? match[3] ?? match[4]);
+    const name = match[1].toLowerCase();
+    if (!attributes.has(name)) attributes.set(name, match[2] ?? match[3] ?? match[4]);
   }
   return attributes;
 }

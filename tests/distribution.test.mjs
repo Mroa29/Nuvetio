@@ -242,6 +242,52 @@ test("validator resolves unquoted href and src attributes", async (t) => {
   ]);
 });
 
+test("validator preserves the first duplicate HTML attribute like browsers", async (t) => {
+  const fixtures = [
+    {
+      name: "missing source",
+      html: "<img src=./missing.png src=./local.png alt=\"\">",
+      expected: ["docs/index.html: missing link target './missing.png'"],
+    },
+    {
+      name: "remote script",
+      html: "<script src=https://example.com/remote.js src=./local.js></script>",
+      expected: ["docs/index.html: contains remote script"],
+    },
+    {
+      name: "insecure asset",
+      html: "<img src=http://example.com/remote.png src=./local.png alt=\"\">",
+      expected: ["docs/index.html: contains insecure remote asset"],
+    },
+    {
+      name: "tracking pixel style",
+      html: '<img src="https://example.com/pixel.gif" style="width:1px;height:1px" style="width:20px;height:20px" alt="">',
+      expected: ["docs/index.html: contains tracking pixel"],
+    },
+  ];
+  const actual = [];
+
+  for (const fixture of fixtures) {
+    const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-duplicates-"));
+    t.after(() => rm(root, { recursive: true, force: true }));
+    await mkdir(path.join(root, "docs"), { recursive: true });
+    await writeFile(path.join(root, "docs/index.html"), fixture.html, "utf8");
+    await writeFile(path.join(root, "docs/local.js"), "", "utf8");
+    await writeFile(path.join(root, "docs/local.png"), "", "utf8");
+
+    const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+    actual.push({
+      name: fixture.name,
+      errors: await validateDistribution(root, { requiredFiles: [] }),
+    });
+  }
+
+  assert.deepEqual(
+    actual,
+    fixtures.map(({ name, expected }) => ({ name, errors: expected })),
+  );
+});
+
 test("validator rejects insecure CSS url assets", async (t) => {
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-css-assets-"));
   t.after(() => rm(root, { recursive: true, force: true }));
