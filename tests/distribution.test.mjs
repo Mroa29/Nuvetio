@@ -44,6 +44,21 @@ test("public manifest and marketplace expose a skills-only Nuvetio plugin", asyn
   assert.match(migrationSkill, /ahora se llama Nuvetio/i);
 });
 
+test("legacy migration package remains valid for plugin ingestion", async () => {
+  const manifest = JSON.parse(
+    await readFile(path.join(ROOT, "plugins/ai-team-core/.codex-plugin/plugin.json"), "utf8"),
+  );
+
+  assert.equal(typeof manifest.author, "object");
+  assert.match(manifest.author.name, /\S/);
+  for (const field of ["longDescription", "developerName", "category"]) {
+    assert.match(manifest.interface[field], /\S/, field);
+  }
+  assert.ok("defaultPrompt" in manifest.interface);
+  assert.ok(Array.isArray(manifest.interface.capabilities));
+  assert.ok(manifest.interface.capabilities.every((value) => typeof value === "string" && value.trim()));
+});
+
 test("orchestration skill supports products, AI, mockups, delivery, and safe fallbacks", async () => {
   const skill = await readFile(
     path.join(ROOT, "plugins/nuvetio/skills/operate-nuvetio/SKILL.md"),

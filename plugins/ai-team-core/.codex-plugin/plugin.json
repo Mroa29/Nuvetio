@@ -2,9 +2,23 @@
   "name": "ai-team-core",
   "version": "0.1.1",
   "description": "Paquete legado: AI Team Core ahora se llama Nuvetio.",
+  "author": {
+    "name": "Marcos Roa",
+    "email": "marcos.roa.ocampos@gmail.com",
+    "url": "https://github.com/Mroa29"
+  },
   "skills": "./skills/",
   "interface": {
     "displayName": "AI Team Core (legado)",
-    "shortDescription": "Migra a Nuvetio."
+    "shortDescription": "Migra a Nuvetio.",
+    "longDescription": "Explica que AI Team Core ahora se llama Nuvetio y guía una migración segura sin modificar proyectos ni desinstalar nada sin autorización.",
+    "developerName": "Marcos Roa",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Migration guidance"
+    ],
+    "defaultPrompt": [
+      "Ayúdame a migrar de AI Team Core a Nuvetio de forma segura."
+    ]
   }
 }
