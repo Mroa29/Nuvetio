@@ -10,10 +10,12 @@ Sitio público previsto tras la migración: <https://mroa29.github.io/Nuvetio/>
 
 ## Para usuarios
 
-- En ChatGPT web o en la app de escritorio, abre la pestaña **Plugins**, busca Nuvetio, abre su ficha y pulsa el botón **+**.
-- En Codex CLI, escribe `/plugins`, busca Nuvetio e instálalo desde el navegador de plugins.
+1. Descarga `Nuvetio-0.2.0.zip` desde la release y descomprímelo en Descargas.
+2. Abre Terminal y ejecuta `cd ~/Downloads/Nuvetio-0.2.0`.
+3. Ejecuta `codex plugin marketplace add .` y después `codex plugin add nuvetio@nuvetio`.
+4. Inicia una sesión nueva de Codex CLI y escribe tu consulta normalmente.
 
-La extensión IDE de Codex no admite plugins. Después de instalar Nuvetio, inicia un chat o una sesión nueva. Este repositorio es el paquete técnico público y no es el flujo de instalación recomendado para usuarios finales.
+La instalación directa en ChatGPT estará disponible después de publicar Nuvetio en su directorio de Plugins. La extensión IDE de Codex no admite plugins.
 
 ## Para colaboradores
 

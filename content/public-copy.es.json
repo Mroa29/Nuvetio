@@ -4,10 +4,10 @@
   "shortTagline": "Tu equipo experto de IA.",
   "summary": "Nuvetio convierte tus ideas y consultas en procesos claros de producto, diseño, inteligencia artificial e ingeniería. Tú explicas lo que necesitas con tus propias palabras; sus agentes te ayudan a analizarlo, mejorarlo y llevarlo a resultados concretos.",
   "installSteps": [
-    "En ChatGPT web o en la app de escritorio, abre la pestaña Plugins para entrar en el directorio.",
-    "Busca Nuvetio, abre su ficha y pulsa el botón + para instalarlo.",
-    "Si usas Codex CLI, escribe /plugins, busca Nuvetio e instálalo desde el navegador de plugins. La extensión IDE de Codex no admite plugins.",
-    "Después de instalarlo, inicia un chat nuevo en ChatGPT o una sesión nueva en Codex CLI y escribe tu consulta normalmente."
+    "Descarga Nuvetio 0.2.0 y descomprime el ZIP dentro de la carpeta Descargas de tu Mac.",
+    "Abre Terminal y escribe: cd ~/Downloads/Nuvetio-0.2.0",
+    "Instala el marketplace con codex plugin marketplace add . y luego instala Nuvetio con codex plugin add nuvetio@nuvetio",
+    "Inicia una sesión nueva de Codex CLI y escribe tu consulta normalmente. La instalación directa en ChatGPT estará disponible después de publicar Nuvetio en su directorio de Plugins."
   ],
   "benefits": [
     "Transforma ideas generales en objetivos y entregables claros.",
@@ -27,8 +27,8 @@
     "outcome": "Nuvetio aclara el problema y el usuario, evalúa dónde aporta valor la IA, propone el flujo y las funcionalidades, desarrolla el concepto de las pantallas, revisa privacidad y seguridad, y prepara un plan con pruebas y criterios de éxito."
   },
   "troubleshooting": [
-    "En ChatGPT web o en la app de escritorio, verifica que tu cuenta tenga acceso a la pestaña Plugins.",
-    "En Codex CLI, escribe /plugins para abrir el navegador. La extensión IDE de Codex no admite plugins.",
-    "Si ya lo instalaste, inicia un chat o una sesión nueva y comprueba que figure entre los plugins instalados."
+    "Comprueba que Codex CLI esté instalado escribiendo codex --version en Terminal.",
+    "Ejecuta los comandos desde la carpeta Nuvetio-0.2.0 que descomprimiste en Descargas.",
+    "Después de instalarlo, inicia una sesión nueva de Codex CLI y comprueba que Nuvetio figure entre los plugins instalados."
   ]
 }

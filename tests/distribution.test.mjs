@@ -138,9 +138,11 @@ test("site reuses the approved message and beginner installation flow", async ()
   assert.equal(copy.installSteps.length, 4);
   assert.equal(copy.benefits.length, 6);
   assert.equal(copy.prompts.length, 3);
-  assert.ok(copy.installSteps.some((step) => step.includes("ChatGPT web")));
-  assert.ok(copy.installSteps.some((step) => step.includes("/plugins")));
-  assert.ok(copy.installSteps.some((step) => step.includes("extensión IDE")));
+  assert.ok(copy.installSteps.some((step) => step.includes("Descarga Nuvetio 0.2.0")));
+  assert.ok(copy.installSteps.some((step) => step.includes("codex plugin marketplace add .")));
+  assert.ok(copy.installSteps.some((step) => step.includes("codex plugin add nuvetio@nuvetio")));
+  assert.ok(copy.installSteps.some((step) => step.includes("instalación directa en ChatGPT estará disponible después")));
+  assert.ok(copy.installSteps.every((step) => !step.includes("Busca Nuvetio, abre su ficha")));
   assert.match(home, new RegExp(copy.tagline.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   for (const step of copy.installSteps) assert.ok(home.includes(step));
   assert.ok(home.includes(copy.example.userPrompt));
