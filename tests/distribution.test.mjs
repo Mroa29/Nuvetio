@@ -444,6 +444,27 @@ test("validator requires manifest starter prompts to use canonical public copy",
   assert.deepEqual(errors, ["Manifest defaultPrompt must use approved starter prompts"]);
 });
 
+test("validator rejects release notes whose heading disagrees with the package version", async (t) => {
+  const root = await mkdtemp(path.join(os.tmpdir(), "nuvetio-release-version-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await mkdir(path.join(root, "submission"), { recursive: true });
+  await writeFile(
+    path.join(root, "package.json"),
+    JSON.stringify({ version: "0.2.0" }),
+    "utf8",
+  );
+  await writeFile(
+    path.join(root, "submission/release-notes.md"),
+    "# Notas de la versión 0.1.0\n",
+    "utf8",
+  );
+
+  const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
+  assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
+    "submission/release-notes.md: heading must match package version 0.2.0",
+  ]);
+});
+
 test("downloadable guide is a single-page PDF", async () => {
   const pdf = await readFile(
     path.join(ROOT, "docs/downloads/guia-rapida-nuvetio.pdf"),

@@ -240,6 +240,29 @@ async function validateDownloadableGuide(root, errors) {
   }
 }
 
+async function validateReleaseNotesVersion(root, errors) {
+  const packagePath = path.join(root, "package.json");
+  const notesPath = path.join(root, "submission/release-notes.md");
+  if (!(await exists(packagePath)) || !(await exists(notesPath))) return;
+
+  let packageJson;
+  try {
+    packageJson = JSON.parse(await readFile(packagePath, "utf8"));
+  } catch {
+    return;
+  }
+  if (typeof packageJson?.version !== "string" || packageJson.version.length === 0) return;
+
+  const notes = await readFile(notesPath, "utf8");
+  const headingVersion = notes.match(/^# Notas de la versión (\S+)\s*$/m)?.[1];
+  if (headingVersion !== packageJson.version) {
+    errors.push(
+      "submission/release-notes.md: heading must match package version " +
+        packageJson.version,
+    );
+  }
+}
+
 export async function validateDistribution(
   root,
   { requiredFiles = REQUIRED_FILES } = {},
@@ -287,6 +310,7 @@ export async function validateDistribution(
   }
   await validateApprovedPublicCopy(root, errors);
   await validateDownloadableGuide(root, errors);
+  await validateReleaseNotesVersion(root, errors);
 
   const manifestPath = path.join(root, "plugins/nuvetio/.codex-plugin/plugin.json");
   if (await exists(manifestPath)) {

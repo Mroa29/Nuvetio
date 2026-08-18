@@ -1,4 +1,4 @@
-# Notas de la versión 0.1.0
+# Notas de la versión 0.2.0
 
 Nuvetio 0.2.0, antes AI Team Core, preparado para un envío skills-only con una ruta de migración segura.
 
