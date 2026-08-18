@@ -153,6 +153,23 @@
       font-weight: 700;
     }
     .example strong { color: #bffcf7; }
+    @media screen and (max-width: 760px) {
+      body { width: 100%; min-height: auto; }
+      .guide-header {
+        grid-template-columns: 16mm 1fr;
+        gap: 3mm;
+        padding: 4mm;
+        border-radius: 0;
+      }
+      .guide-header img { width: 16mm; height: 16mm; }
+      main { padding: 4mm; }
+      .steps,
+      .benefits,
+      .prompts,
+      .support { grid-template-columns: 1fr; }
+      .support h2,
+      .support-link { grid-column: 1; }
+    }
     @media print {
       html { background: var(--white); }
       body { width: auto; min-height: auto; }

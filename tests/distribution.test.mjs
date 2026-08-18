@@ -146,6 +146,17 @@ test("site reuses the approved message and beginner installation flow", async ()
   assert.ok(home.includes(copy.example.userPrompt));
 });
 
+test("quick-start HTML fits a phone viewport while preserving the A4 print layout", async () => {
+  const guide = await readFile(path.join(ROOT, "docs/guia-rapida.html"), "utf8");
+  const mobile = guide.match(/@media screen and \(max-width: 760px\)\s*{([\s\S]*?)}\s*@media print/)?.[1];
+
+  assert.ok(mobile, "the guide needs a screen-only mobile layout");
+  assert.match(mobile, /body\s*{[^}]*width:\s*100%/);
+  assert.match(mobile, /\.steps[^}]*grid-template-columns:\s*1fr/);
+  assert.match(mobile, /\.benefits[^}]*grid-template-columns:\s*1fr/);
+  assert.match(mobile, /\.prompts[^}]*grid-template-columns:\s*1fr/);
+});
+
 test("hero eyebrow normal text meets WCAG AA across the gradient", async () => {
   const css = await readFile(path.join(ROOT, "docs/styles.css"), "utf8");
   const variables = Object.fromEntries(
