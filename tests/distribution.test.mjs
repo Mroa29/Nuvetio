@@ -324,6 +324,15 @@ test("validator rejects remote scripts, insecure assets, analytics, and tracking
   assert.ok(errors.some((error) => error.includes("tracking pixel")));
 });
 
+test("public landing page offers the versioned Nuvetio ZIP", async () => {
+  const html = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
+
+  assert.match(
+    html,
+    /href="https:\/\/github\.com\/Mroa29\/Nuvetio\/releases\/download\/v0\.2\.0\/Nuvetio-0\.2\.0\.zip"[^>]*>Descargar Nuvetio<\/a>/,
+  );
+});
+
 test("validator resolves unquoted href and src attributes", async (t) => {
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-unquoted-links-"));
   t.after(() => rm(root, { recursive: true, force: true }));
