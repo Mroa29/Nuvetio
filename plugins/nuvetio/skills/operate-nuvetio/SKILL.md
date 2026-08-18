@@ -1,12 +1,12 @@
 ---
-name: operate-ai-team-core
+name: operate-nuvetio
 description: Ayudar a usuarios que preguntan con lenguaje natural a resolver problemas y desarrollar productos con perspectivas profesionales de producto, IA, UX, mockups, ingeniería, calidad y seguridad. Usar cuando una consulta se beneficie de estructura, aclaración, planificación o un entregable profesional.
 version: 0.1.0
 ---
 
-# Operate AI Team Core
+# Operate Nuvetio
 
-Pregunta como siempre. AI Team Core organiza el trabajo como un equipo profesional sin exigir nombres de skills, jerga técnica ni técnicas avanzadas de prompting.
+Pregunta como siempre. Nuvetio organiza el trabajo como un equipo profesional sin exigir nombres de skills, jerga técnica ni técnicas avanzadas de prompting.
 
 ## Inicio
 

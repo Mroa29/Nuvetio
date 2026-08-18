@@ -1,9 +1,21 @@
 {
-  "name": "personal",
+  "name": "nuvetio",
   "interface": {
-    "displayName": "Personal"
+    "displayName": "Nuvetio"
   },
   "plugins": [
+    {
+      "name": "nuvetio",
+      "source": {
+        "source": "local",
+        "path": "./plugins/nuvetio"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    },
     {
       "name": "ai-team-core",
       "source": {
@@ -11,7 +23,7 @@
         "path": "./plugins/ai-team-core"
       },
       "policy": {
-        "installation": "AVAILABLE",
+        "installation": "NOT_AVAILABLE",
         "authentication": "ON_INSTALL"
       },
       "category": "Developer Tools"

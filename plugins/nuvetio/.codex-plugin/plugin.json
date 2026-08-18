@@ -1,0 +1,42 @@
+{
+  "name": "nuvetio",
+  "version": "0.2.0",
+  "description": "Tu equipo experto de IA, listo para convertir preguntas cotidianas en resultados profesionales.",
+  "author": {
+    "name": "Marcos Roa",
+    "email": "marcos.roa.ocampos@gmail.com",
+    "url": "https://github.com/Mroa29"
+  },
+  "homepage": "https://mroa29.github.io/Nuvetio/",
+  "repository": "https://github.com/Mroa29/Nuvetio",
+  "license": "MIT",
+  "keywords": [
+    "artificial-intelligence",
+    "product-development",
+    "ux",
+    "engineering",
+    "prompting"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Nuvetio",
+    "shortDescription": "Tu equipo experto de IA.",
+    "longDescription": "Ayuda a convertir ideas y consultas en productos, experiencias, mockups, planes técnicos y resultados revisados con perspectivas profesionales de producto, IA, UX, ingeniería, calidad y seguridad.",
+    "developerName": "Marcos Roa",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Product discovery",
+      "AI product development",
+      "UX and mockups",
+      "Engineering planning",
+      "Quality and security"
+    ],
+    "websiteURL": "https://mroa29.github.io/Nuvetio/",
+    "defaultPrompt": [
+      "Tengo una idea para un producto con IA. Ayúdame a definirlo y encontrar el primer paso.",
+      "Diseña el flujo y un mockup inicial para esta experiencia.",
+      "Analiza este problema del negocio y prepara un plan profesional para resolverlo."
+    ],
+    "brandColor": "#155EEF"
+  }
+}

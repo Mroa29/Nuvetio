@@ -3,8 +3,8 @@
 - [ ] Confirmar permiso de escritura en Apps Management.
 - [ ] Verificar la identidad individual de Marcos Roa.
 - [ ] Registrar el sitio web público, soporte, privacidad y términos.
-- [ ] Cargar `docs/assets/logo-ai-team-core-1024.png` como logo aprobado.
-- [ ] Cargar el bundle de skills de AI Team Core.
+- [ ] Cargar `docs/assets/logo-nuvetio-1024.png` como logo aprobado.
+- [ ] Cargar el bundle de skills de Nuvetio.
 - [ ] Registrar los tres starter prompts en español.
 - [ ] Registrar los cinco casos positivos y los tres casos negativos.
 - [ ] Seleccionar los países compatibles para la disponibilidad internacional.

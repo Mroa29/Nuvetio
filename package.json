@@ -1,8 +1,8 @@
 {
-  "name": "ai-team-core-plugin",
-  "version": "0.1.0",
+  "name": "nuvetio-plugin",
+  "version": "0.2.0",
   "private": true,
-  "description": "Public distribution and onboarding for AI Team Core.",
+  "description": "Distribución pública y guía de inicio de Nuvetio.",
   "license": "MIT",
   "type": "module",
   "scripts": {

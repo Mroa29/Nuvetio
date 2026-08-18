@@ -1,8 +1,8 @@
-# AI Team Core
+# Nuvetio
 
 **Pregunta como siempre. Construye como un equipo profesional.**
 
-AI Team Core ayuda a convertir ideas y consultas en productos, experiencias, mockups, planes técnicos y resultados revisados. El usuario explica lo que necesita con sus propias palabras; no tiene que aprender prompting ni conocer las skills internas.
+Nuvetio ayuda a convertir ideas y consultas en productos, experiencias, mockups, planes técnicos y resultados revisados. El usuario explica lo que necesita con sus propias palabras; no tiene que aprender prompting ni conocer las skills internas.
 
 ## Qué aporta
 

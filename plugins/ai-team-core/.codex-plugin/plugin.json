@@ -1,42 +1,10 @@
 {
   "name": "ai-team-core",
-  "version": "0.1.0",
-  "description": "Convierte consultas naturales en procesos profesionales de producto, IA, diseño e ingeniería.",
-  "author": {
-    "name": "Marcos Roa",
-    "email": "marcos.roa.ocampos@gmail.com",
-    "url": "https://github.com/Mroa29"
-  },
-  "homepage": "https://mroa29.github.io/AI-Team-Core-Plugin/",
-  "repository": "https://github.com/Mroa29/AI-Team-Core-Plugin",
-  "license": "MIT",
-  "keywords": [
-    "artificial-intelligence",
-    "product-development",
-    "ux",
-    "engineering",
-    "prompting"
-  ],
+  "version": "0.1.1",
+  "description": "Paquete legado: AI Team Core ahora se llama Nuvetio.",
   "skills": "./skills/",
   "interface": {
-    "displayName": "AI Team Core",
-    "shortDescription": "Pregunta como siempre. Construye como un equipo profesional.",
-    "longDescription": "Ayuda a convertir ideas y consultas en productos, experiencias, mockups, planes técnicos y resultados revisados con perspectivas profesionales de producto, IA, UX, ingeniería, calidad y seguridad.",
-    "developerName": "Marcos Roa",
-    "category": "Developer Tools",
-    "capabilities": [
-      "Product discovery",
-      "AI product development",
-      "UX and mockups",
-      "Engineering planning",
-      "Quality and security"
-    ],
-    "websiteURL": "https://mroa29.github.io/AI-Team-Core-Plugin/",
-    "defaultPrompt": [
-      "Tengo una idea para un producto con IA. Ayúdame a definirlo y encontrar el primer paso.",
-      "Diseña el flujo y un mockup inicial para esta experiencia.",
-      "Analiza este problema del negocio y prepara un plan profesional para resolverlo."
-    ],
-    "brandColor": "#155EEF"
+    "displayName": "AI Team Core (legado)",
+    "shortDescription": "Migra a Nuvetio."
   }
 }

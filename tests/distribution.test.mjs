@@ -168,15 +168,15 @@ test("public package has no MCP configuration or external authentication require
 test("validator rejects MCP configuration and private project content", async (t) => {
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-invalid-"));
   t.after(() => rm(root, { recursive: true, force: true }));
-  await mkdir(path.join(root, "plugins/ai-team-core"), { recursive: true });
-  await writeFile(path.join(root, "plugins/ai-team-core/.mcp.json"), "{}", "utf8");
+  await mkdir(path.join(root, "plugins/nuvetio"), { recursive: true });
+  await writeFile(path.join(root, "plugins/nuvetio/.mcp.json"), "{}", "utf8");
   const forbiddenTerm = ["ERP", "Kronos"].join(" ");
   await writeFile(path.join(root, "internal.md"), forbiddenTerm + " private memory", "utf8");
 
   const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
   const errors = await validateDistribution(root, { requiredFiles: [] });
   assert.deepEqual(errors, [
-    "Forbidden file: plugins/ai-team-core/.mcp.json",
+    "Forbidden file: plugins/nuvetio/.mcp.json",
     "internal.md: contains private distribution term '" + forbiddenTerm + "'",
   ]);
 });
@@ -184,21 +184,21 @@ test("validator rejects MCP configuration and private project content", async (t
 test("validator reports a malformed plugin manifest without throwing", async (t) => {
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-invalid-manifest-"));
   t.after(() => rm(root, { recursive: true, force: true }));
-  const manifestDirectory = path.join(root, "plugins/ai-team-core/.codex-plugin");
+  const manifestDirectory = path.join(root, "plugins/nuvetio/.codex-plugin");
   await mkdir(manifestDirectory, { recursive: true });
   await writeFile(path.join(manifestDirectory, "plugin.json"), "{ invalid json", "utf8");
 
   const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
   const errors = await validateDistribution(root, { requiredFiles: [] });
   assert.deepEqual(errors, [
-    "plugins/ai-team-core/.codex-plugin/plugin.json: invalid JSON",
+    "plugins/nuvetio/.codex-plugin/plugin.json: invalid JSON",
   ]);
 });
 
 test("validator requires the plugin manifest to be a JSON object", async (t) => {
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-non-object-manifest-"));
   t.after(() => rm(root, { recursive: true, force: true }));
-  const manifestDirectory = path.join(root, "plugins/ai-team-core/.codex-plugin");
+  const manifestDirectory = path.join(root, "plugins/nuvetio/.codex-plugin");
   const manifestPath = path.join(manifestDirectory, "plugin.json");
   await mkdir(manifestDirectory, { recursive: true });
 
@@ -207,7 +207,7 @@ test("validator requires the plugin manifest to be a JSON object", async (t) => 
     await writeFile(manifestPath, source, "utf8");
     const errors = await validateDistribution(root, { requiredFiles: [] });
     assert.deepEqual(errors, [
-      "plugins/ai-team-core/.codex-plugin/plugin.json: manifest must be a JSON object",
+      "plugins/nuvetio/.codex-plugin/plugin.json: manifest must be a JSON object",
     ]);
   }
 });
@@ -234,10 +234,10 @@ test("validator requires an existing local favicon on each public HTML page", as
   t.after(() => rm(root, { recursive: true, force: true }));
   const assets = path.join(root, "docs/assets");
   await mkdir(assets, { recursive: true });
-  await writeFile(path.join(assets, "logo-ai-team-core-1024.png"), "png", "utf8");
+  await writeFile(path.join(assets, "logo-nuvetio-1024.png"), "png", "utf8");
   await writeFile(
     path.join(root, "docs/index.html"),
-    '<link rel="icon" type="image/png" href="./assets/logo-ai-team-core-1024.png">',
+    '<link rel="icon" type="image/png" href="./assets/logo-nuvetio-1024.png">',
     "utf8",
   );
   await writeFile(path.join(root, "docs/soporte.html"), "<title>Soporte</title>", "utf8");
@@ -396,17 +396,17 @@ test("validator requires manifest starter prompts to use canonical public copy",
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-prompts-"));
   t.after(() => rm(root, { recursive: true, force: true }));
   await mkdir(path.join(root, "content"), { recursive: true });
-  await mkdir(path.join(root, "plugins/ai-team-core/.codex-plugin"), { recursive: true });
+  await mkdir(path.join(root, "plugins/nuvetio/.codex-plugin"), { recursive: true });
   await writeFile(
     path.join(root, "content/public-copy.es.json"),
     JSON.stringify({ prompts: ["Approved starter prompt"] }),
     "utf8",
   );
   await writeFile(
-    path.join(root, "plugins/ai-team-core/.codex-plugin/plugin.json"),
+    path.join(root, "plugins/nuvetio/.codex-plugin/plugin.json"),
     JSON.stringify({
-      name: "ai-team-core",
-      version: "0.1.0",
+      name: "nuvetio",
+      version: "0.2.0",
       skills: "./skills/",
       interface: { defaultPrompt: ["Different prompt"] },
     }),
@@ -432,14 +432,14 @@ test("validator rejects invalid and multi-page downloadable guides", async (t) =
   const root = await mkdtemp(path.join(os.tmpdir(), "ai-team-core-public-pdf-"));
   t.after(() => rm(root, { recursive: true, force: true }));
   const downloads = path.join(root, "docs/downloads");
-  const guide = path.join(downloads, "guia-rapida-ai-team-core.pdf");
+  const guide = path.join(downloads, "guia-rapida-nuvetio.pdf");
   await mkdir(downloads, { recursive: true });
 
   const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
 
   await writeFile(guide, "not a PDF", "latin1");
   assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
-    "docs/downloads/guia-rapida-ai-team-core.pdf: invalid PDF header",
+    "docs/downloads/guia-rapida-nuvetio.pdf: invalid PDF header",
   ]);
 
   await writeFile(
@@ -448,6 +448,6 @@ test("validator rejects invalid and multi-page downloadable guides", async (t) =
     "latin1",
   );
   assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
-    "docs/downloads/guia-rapida-ai-team-core.pdf: must contain exactly one page (found 2)",
+    "docs/downloads/guia-rapida-nuvetio.pdf: must contain exactly one page (found 2)",
   ]);
 });
