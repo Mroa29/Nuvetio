@@ -9,8 +9,8 @@ export const REQUIRED_FILES = [
   "LICENSE",
   "README.md",
   "content/public-copy.es.json",
-  "docs/assets/logo-ai-team-core-1024.png",
-  "docs/downloads/guia-rapida-ai-team-core.pdf",
+  "docs/assets/logo-nuvetio-1024.png",
+  "docs/downloads/guia-rapida-nuvetio.pdf",
   "docs/guia-rapida.html",
   "docs/index.html",
   "docs/privacidad.html",
@@ -18,12 +18,14 @@ export const REQUIRED_FILES = [
   "docs/styles.css",
   "docs/terminos.html",
   "package.json",
+  "plugins/nuvetio/.codex-plugin/plugin.json",
+  "plugins/nuvetio/README.md",
+  "plugins/nuvetio/skills/operate-nuvetio/SKILL.md",
+  "plugins/nuvetio/skills/operate-nuvetio/references/product-and-ai.md",
+  "plugins/nuvetio/skills/operate-nuvetio/references/experience-and-mockups.md",
+  "plugins/nuvetio/skills/operate-nuvetio/references/delivery-and-quality.md",
   "plugins/ai-team-core/.codex-plugin/plugin.json",
-  "plugins/ai-team-core/README.md",
-  "plugins/ai-team-core/skills/operate-ai-team-core/SKILL.md",
-  "plugins/ai-team-core/skills/operate-ai-team-core/references/product-and-ai.md",
-  "plugins/ai-team-core/skills/operate-ai-team-core/references/experience-and-mockups.md",
-  "plugins/ai-team-core/skills/operate-ai-team-core/references/delivery-and-quality.md",
+  "plugins/ai-team-core/skills/migrate-to-nuvetio/SKILL.md",
   "scripts/validate-distribution.mjs",
   "submission/checklist.md",
   "submission/listing.es.md",
@@ -221,7 +223,7 @@ async function validateApprovedPublicCopy(root, errors) {
 }
 
 async function validateDownloadableGuide(root, errors) {
-  const guidePath = path.join(root, "docs/downloads/guia-rapida-ai-team-core.pdf");
+  const guidePath = path.join(root, "docs/downloads/guia-rapida-nuvetio.pdf");
   if (!(await exists(guidePath))) return;
 
   const pdf = await readFile(guidePath);
@@ -249,11 +251,11 @@ export async function validateDistribution(
 
   const files = await collectFiles(root);
   const requiresPublicFavicon = await exists(
-    path.join(root, "docs/assets/logo-ai-team-core-1024.png"),
+    path.join(root, "docs/assets/logo-nuvetio-1024.png"),
   );
   for (const file of files) {
     const relative = display(root, file);
-    if (relative === "plugins/ai-team-core/.mcp.json") {
+    if (relative === "plugins/nuvetio/.mcp.json") {
       errors.push("Forbidden file: " + relative);
     }
     if (!TEXT_EXTENSIONS.has(path.extname(file))) continue;
@@ -286,7 +288,7 @@ export async function validateDistribution(
   await validateApprovedPublicCopy(root, errors);
   await validateDownloadableGuide(root, errors);
 
-  const manifestPath = path.join(root, "plugins/ai-team-core/.codex-plugin/plugin.json");
+  const manifestPath = path.join(root, "plugins/nuvetio/.codex-plugin/plugin.json");
   if (await exists(manifestPath)) {
     let manifest;
     try {
@@ -297,8 +299,8 @@ export async function validateDistribution(
     if (manifest !== undefined && (manifest === null || Array.isArray(manifest) || typeof manifest !== "object")) {
       errors.push(display(root, manifestPath) + ": manifest must be a JSON object");
     } else if (manifest !== undefined) {
-      if (manifest.name !== "ai-team-core") errors.push("Manifest name must be 'ai-team-core'");
-      if (manifest.version !== "0.1.0") errors.push("Manifest version must be '0.1.0'");
+      if (manifest.name !== "nuvetio") errors.push("Manifest name must be 'nuvetio'");
+      if (manifest.version !== "0.2.0") errors.push("Manifest version must be '0.2.0'");
       if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
       if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
       const copyPath = path.join(root, "content/public-copy.es.json");

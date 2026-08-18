@@ -7,9 +7,9 @@ import { fileURLToPath } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-test("public manifest and marketplace expose a skills-only AI Team Core plugin", async () => {
+test("public manifest and marketplace expose a skills-only Nuvetio plugin", async () => {
   const manifest = JSON.parse(
-    await readFile(path.join(ROOT, "plugins/ai-team-core/.codex-plugin/plugin.json"), "utf8"),
+    await readFile(path.join(ROOT, "plugins/nuvetio/.codex-plugin/plugin.json"), "utf8"),
   );
   const copy = JSON.parse(
     await readFile(path.join(ROOT, "content/public-copy.es.json"), "utf8"),
@@ -18,30 +18,38 @@ test("public manifest and marketplace expose a skills-only AI Team Core plugin",
     await readFile(path.join(ROOT, ".agents/plugins/marketplace.json"), "utf8"),
   );
 
-  assert.equal(manifest.name, "ai-team-core");
-  assert.equal(manifest.version, "0.1.0");
+  assert.equal(manifest.name, "nuvetio");
+  assert.equal(manifest.version, "0.2.0");
   assert.equal(manifest.skills, "./skills/");
   assert.equal("mcpServers" in manifest, false);
   assert.equal(manifest.author.name, "Marcos Roa");
-  assert.equal(manifest.interface.displayName, "AI Team Core");
+  assert.equal(manifest.interface.displayName, "Nuvetio");
+  assert.equal(manifest.description, "Tu equipo experto de IA, listo para convertir preguntas cotidianas en resultados profesionales.");
   assert.equal(manifest.interface.category, "Developer Tools");
   assert.deepEqual(manifest.interface.defaultPrompt, copy.prompts);
 
-  const entry = marketplace.plugins.find(({ name }) => name === "ai-team-core");
+  const entry = marketplace.plugins.find(({ name }) => name === "nuvetio");
   assert.deepEqual(entry, {
-    name: "ai-team-core",
-    source: { source: "local", path: "./plugins/ai-team-core" },
+    name: "nuvetio",
+    source: { source: "local", path: "./plugins/nuvetio" },
     policy: { installation: "AVAILABLE", authentication: "ON_INSTALL" },
     category: "Developer Tools",
   });
+  const legacy = marketplace.plugins.find(({ name }) => name === "ai-team-core");
+  assert.equal(legacy.policy.installation, "NOT_AVAILABLE");
+  const migrationSkill = await readFile(
+    path.join(ROOT, "plugins/ai-team-core/skills/migrate-to-nuvetio/SKILL.md"),
+    "utf8",
+  );
+  assert.match(migrationSkill, /ahora se llama Nuvetio/i);
 });
 
 test("orchestration skill supports products, AI, mockups, delivery, and safe fallbacks", async () => {
   const skill = await readFile(
-    path.join(ROOT, "plugins/ai-team-core/skills/operate-ai-team-core/SKILL.md"),
+    path.join(ROOT, "plugins/nuvetio/skills/operate-nuvetio/SKILL.md"),
     "utf8",
   );
-  assert.match(skill, /^---\r?\nname: operate-ai-team-core\r?\n/m);
+  assert.match(skill, /^---\r?\nname: operate-nuvetio\r?\n/m);
   assert.match(skill, /pregunta como siempre/i);
   assert.match(skill, /product-and-ai\.md/);
   assert.match(skill, /experience-and-mockups\.md/);
@@ -57,7 +65,7 @@ test("orchestration skill supports products, AI, mockups, delivery, and safe fal
     const source = await readFile(
       path.join(
         ROOT,
-        "plugins/ai-team-core/skills/operate-ai-team-core/references",
+        "plugins/nuvetio/skills/operate-nuvetio/references",
         file,
       ),
       "utf8",
@@ -69,7 +77,7 @@ test("orchestration skill supports products, AI, mockups, delivery, and safe fal
 test("mixed beginner product requests also route to the experience lane", async () => {
   const prompt = "Tengo una idea para crear un asistente con IA que ayude a nuestros clientes, pero no sé cómo diseñarlo. No modifiques archivos ni conectes servicios.";
   const skill = await readFile(
-    path.join(ROOT, "plugins/ai-team-core/skills/operate-ai-team-core/SKILL.md"),
+    path.join(ROOT, "plugins/nuvetio/skills/operate-nuvetio/SKILL.md"),
     "utf8",
   );
 
@@ -110,7 +118,8 @@ test("site reuses the approved message and beginner installation flow", async ()
     await readFile(path.join(ROOT, "content/public-copy.es.json"), "utf8"),
   );
   const home = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
-  assert.equal(copy.tagline, "Pregunta como siempre. Construye como un equipo profesional.");
+  assert.equal(copy.name, "Nuvetio");
+  assert.equal(copy.tagline, "Tu equipo experto de IA, listo para convertir preguntas cotidianas en resultados profesionales.");
   assert.equal(copy.installSteps.length, 4);
   assert.equal(copy.benefits.length, 6);
   assert.equal(copy.prompts.length, 3);
@@ -151,7 +160,7 @@ test("hero eyebrow normal text meets WCAG AA across the gradient", async () => {
 
 test("public package has no MCP configuration or external authentication requirement", async () => {
   await assert.rejects(
-    readFile(path.join(ROOT, "plugins/ai-team-core/.mcp.json"), "utf8"),
+    readFile(path.join(ROOT, "plugins/nuvetio/.mcp.json"), "utf8"),
     { code: "ENOENT" },
   );
 });
@@ -411,7 +420,7 @@ test("validator requires manifest starter prompts to use canonical public copy",
 
 test("downloadable guide is a single-page PDF", async () => {
   const pdf = await readFile(
-    path.join(ROOT, "docs/downloads/guia-rapida-ai-team-core.pdf"),
+    path.join(ROOT, "docs/downloads/guia-rapida-nuvetio.pdf"),
   );
   assert.equal(pdf.subarray(0, 5).toString("ascii"), "%PDF-");
   const source = pdf.toString("latin1");
