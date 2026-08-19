@@ -3,11 +3,37 @@
   "tagline": "Tu equipo experto de IA, listo para convertir preguntas cotidianas en resultados profesionales.",
   "shortTagline": "Tu equipo experto de IA.",
   "summary": "Nuvetio convierte tus ideas y consultas en procesos claros de producto, diseño, inteligencia artificial e ingeniería. Tú explicas lo que necesitas con tus propias palabras; sus agentes te ayudan a analizarlo, mejorarlo y llevarlo a resultados concretos.",
+  "teamIntro": "No necesitas saber de inteligencia artificial. El orquestador de Nuvetio reúne los departamentos especializados que necesita tu pregunta y coordina un resultado profesional.",
+  "departments": [
+    {
+      "name": "Departamento de Ingeniería",
+      "agent": "Engineering Agent",
+      "functions": ["Arquitectura y planificación", "Implementación y TDD", "Debugging, code review y documentación"]
+    },
+    {
+      "name": "Departamento de Producto e IA",
+      "agent": "Product & AI Agent",
+      "functions": ["Problema, objetivo y alcance", "Oportunidades de IA y datos", "Riesgos y criterios de éxito"]
+    },
+    {
+      "name": "Departamento de Experiencia",
+      "agent": "Experience & Mockups Agent",
+      "functions": ["Flujos de usuario", "Pantallas y wireframes", "Mockups, errores y accesibilidad"]
+    },
+    {
+      "name": "Departamento de Calidad y Seguridad",
+      "agent": "Quality & Security Agent",
+      "functions": ["Pruebas y regresiones", "Privacidad y seguridad", "Preparación del lanzamiento"]
+    }
+  ],
+  "coreSystems": ["Skills", "MCP", "Memoria", "Validación"],
+  "optionalCompanion": "Agent Skills: 24 workflows externos de Addy Osmani, instalables opcionalmente.",
+  "futureDepartments": ["Marketing", "Operaciones", "Finanzas", "Legal"],
   "installSteps": [
-    "Descarga Nuvetio 0.2.1 y descomprime el ZIP en la carpeta Descargas.",
+    "Descarga Nuvetio 0.2.2 y descomprime el ZIP en la carpeta Descargas.",
     "En Mac, abre installers/macos y haz doble clic en Instalar-Nuvetio.command. En Windows, abre installers/windows y haz doble clic en Instalar-Nuvetio.cmd.",
     "Confirma cuando la ventana indique que Nuvetio quedó instalado. No necesitas permisos de administrador ni debes pegar comandos.",
-    "Abre una sesión nueva de Codex CLI y escribe tu consulta normalmente. La instalación directa en ChatGPT estará disponible después de publicar Nuvetio en su directorio de Plugins."
+    "Abre una sesión nueva de Codex CLI y escribe tu consulta normalmente. Si quieres ampliar el equipo, ejecuta después el instalador opcional de Agent Skills. La instalación directa en ChatGPT estará disponible después de publicar Nuvetio en su directorio de Plugins."
   ],
   "benefits": [
     "Transforma ideas generales en objetivos y entregables claros.",

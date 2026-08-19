@@ -1,0 +1,13 @@
+{
+  "name": "agent-skills",
+  "displayName": "Agent Skills",
+  "version": "0.6.7",
+  "upstream": "https://github.com/addyosmani/agent-skills",
+  "author": "Addy Osmani",
+  "license": "MIT",
+  "referenceDate": "2026-08-19",
+  "optional": true,
+  "description": "Complemento upstream con 24 workflows de ingeniería para agentes de IA.",
+  "marketplaceCommand": "codex plugin marketplace add https://github.com/addyosmani/agent-skills.git",
+  "pluginCommand": "codex plugin add agent-skills@agent-skills"
+}

@@ -22,7 +22,7 @@ test("public manifest and marketplace expose a skills-only Nuvetio plugin", asyn
   );
 
   assert.equal(manifest.name, "nuvetio");
-  assert.equal(manifest.version, "0.2.1");
+  assert.equal(manifest.version, "0.2.2");
   assert.equal(manifest.skills, "./skills/");
   assert.equal("mcpServers" in manifest, false);
   assert.equal(manifest.author.name, "Marcos Roa");
@@ -141,7 +141,7 @@ test("site reuses the approved message and beginner installation flow", async ()
   assert.equal(copy.installSteps.length, 4);
   assert.equal(copy.benefits.length, 6);
   assert.equal(copy.prompts.length, 3);
-  assert.ok(copy.installSteps.some((step) => step.includes("Descarga Nuvetio 0.2.1")));
+  assert.ok(copy.installSteps.some((step) => step.includes("Descarga Nuvetio 0.2.2")));
   assert.ok(copy.installSteps.some((step) => step.includes("Instalar-Nuvetio.command")));
   assert.ok(copy.installSteps.some((step) => step.includes("Instalar-Nuvetio.cmd")));
   assert.ok(copy.installSteps.some((step) => step.includes("No necesitas permisos de administrador")));
@@ -191,6 +191,80 @@ test("platform installers provide a local, non-administrative Codex setup flow",
     assert.doesNotMatch(source, /curl\s+[^\n|]*\|\s*(sh|bash)|irm\s+[^\n|]*\|\s*iex/i);
     assert.doesNotMatch(source, /Start-Process\s+.*-Verb\s+RunAs/i);
   }
+});
+
+test("optional Agent Skills companion is attributed and explicitly confirmed", async () => {
+  const metadata = JSON.parse(
+    await readFile(path.join(ROOT, "addons/agent-skills.json"), "utf8"),
+  );
+  assert.equal(metadata.name, "agent-skills");
+  assert.equal(metadata.version, "0.6.7");
+  assert.equal(metadata.author, "Addy Osmani");
+  assert.equal(metadata.license, "MIT");
+  assert.equal(metadata.upstream, "https://github.com/addyosmani/agent-skills");
+  assert.equal(metadata.marketplaceCommand, "codex plugin marketplace add https://github.com/addyosmani/agent-skills.git");
+  assert.equal(metadata.pluginCommand, "codex plugin add agent-skills@agent-skills");
+
+  const launchers = [
+    "installers/macos/Instalar-Agent-Skills.command",
+    "installers/windows/Instalar-Agent-Skills.ps1",
+    "installers/windows/Instalar-Agent-Skills.cmd",
+  ];
+  for (const relative of launchers) {
+    const source = await readFile(path.join(ROOT, relative), "utf8");
+    assert.ok(source.length > 120, `${relative} must contain an actionable flow`);
+    assert.match(source, /Agent Skills/i);
+    assert.match(source, /addyosmani\/agent-skills/i);
+    assert.match(source, /agent-skills@agent-skills/i);
+    assert.match(source, /confirm|confirma|escribe.*si|read/i);
+    assert.doesNotMatch(source, /curl\s+[^\n|]*\|\s*(sh|bash)|irm\s+[^\n|]*\|\s*iex/i);
+    assert.doesNotMatch(source, /Start-Process\s+.*-Verb\s+RunAs/i);
+  }
+
+  for (const relative of [
+    "installers/macos/Instalar-Nuvetio.command",
+    "installers/windows/Instalar-Nuvetio.ps1",
+    "installers/windows/Instalar-Nuvetio.cmd",
+  ]) {
+    const source = await readFile(path.join(ROOT, relative), "utf8");
+    assert.doesNotMatch(source, /agent-skills/i, `${relative} must not auto-install the companion`);
+  }
+});
+
+test("homepage presents the complete active Nuvetio team and mascot", async () => {
+  const home = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
+  assert.match(home, /mascot-nuvetio\.svg/);
+  assert.match(home, /alt="Mascota de Nuvetio/i);
+  assert.match(home, /id="equipo"/);
+  for (const label of [
+    "Orquestador Nuvetio",
+    "Departamento de Ingeniería",
+    "Engineering Agent",
+    "Departamento de Producto e IA",
+    "Product &amp; AI Agent",
+    "Departamento de Experiencia",
+    "Experience &amp; Mockups Agent",
+    "Departamento de Calidad y Seguridad",
+    "Quality &amp; Security Agent",
+    "Skills",
+    "MCP",
+    "Memoria",
+    "Validación",
+    "Agent Skills",
+    "Marketing",
+    "Operaciones",
+    "Finanzas",
+    "Legal",
+  ]) {
+    assert.match(home, new RegExp(label.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i"), label);
+  }
+  assert.match(home, /todav[ií]a no son departamentos activos/i);
+  assert.match(home, /no necesitas saber de inteligencia artificial/i);
+
+  const mascot = await readFile(path.join(ROOT, "docs/assets/mascot-nuvetio.svg"), "utf8");
+  assert.match(mascot, /<svg\b/);
+  assert.match(mascot, /<title[^>]*>Nuvetio/i);
+  assert.match(mascot, /viewBox=/i);
 });
 
 test("quick-start HTML fits a phone viewport while preserving the A4 print layout", async () => {
@@ -376,7 +450,7 @@ test("public landing page offers the versioned Nuvetio ZIP", async () => {
 
   assert.match(
     html,
-    /href="https:\/\/github\.com\/Mroa29\/Nuvetio\/releases\/download\/v0\.2\.1\/Nuvetio-0\.2\.1\.zip"[^>]*>Descargar Nuvetio<\/a>/,
+    /href="https:\/\/github\.com\/Mroa29\/Nuvetio\/releases\/download\/v0\.2\.2\/Nuvetio-0\.2\.2\.zip"[^>]*>Descargar Nuvetio<\/a>/,
   );
 });
 
@@ -488,7 +562,7 @@ test("validator requires manifest starter prompts to use canonical public copy",
     path.join(root, "plugins/nuvetio/.codex-plugin/plugin.json"),
     JSON.stringify({
       name: "nuvetio",
-      version: "0.2.1",
+      version: "0.2.2",
       skills: "./skills/",
       interface: { defaultPrompt: ["Different prompt"] },
     }),
@@ -506,7 +580,7 @@ test("validator rejects release notes whose heading disagrees with the package v
   await mkdir(path.join(root, "submission"), { recursive: true });
   await writeFile(
     path.join(root, "package.json"),
-    JSON.stringify({ version: "0.2.1" }),
+    JSON.stringify({ version: "0.2.2" }),
     "utf8",
   );
   await writeFile(
@@ -517,7 +591,7 @@ test("validator rejects release notes whose heading disagrees with the package v
 
   const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
   assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
-    "submission/release-notes.md: heading must match package version 0.2.1",
+    "submission/release-notes.md: heading must match package version 0.2.2",
   ]);
 });
 

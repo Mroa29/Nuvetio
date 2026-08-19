@@ -1,4 +1,4 @@
-# Checklist de envío al portal (Nuvetio 0.2.1)
+# Checklist de envío al portal (Nuvetio 0.2.2)
 
 Estado actual: **NOT SUBMITTED**. Usa `openai-portal-handoff.md` como guía y detente antes de cualquier botón de envío o publicación.
 

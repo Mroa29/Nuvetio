@@ -10,6 +10,7 @@ export const REQUIRED_FILES = [
   "README.md",
   "content/public-copy.es.json",
   "docs/assets/logo-nuvetio-1024.png",
+  "docs/assets/mascot-nuvetio.svg",
   "docs/downloads/guia-rapida-nuvetio.pdf",
   "docs/guia-rapida.html",
   "docs/index.html",
@@ -24,6 +25,10 @@ export const REQUIRED_FILES = [
   "plugins/nuvetio/skills/operate-nuvetio/references/product-and-ai.md",
   "plugins/nuvetio/skills/operate-nuvetio/references/experience-and-mockups.md",
   "plugins/nuvetio/skills/operate-nuvetio/references/delivery-and-quality.md",
+  "addons/agent-skills.json",
+  "installers/macos/Instalar-Agent-Skills.command",
+  "installers/windows/Instalar-Agent-Skills.ps1",
+  "installers/windows/Instalar-Agent-Skills.cmd",
   "plugins/ai-team-core/.codex-plugin/plugin.json",
   "plugins/ai-team-core/skills/migrate-to-nuvetio/SKILL.md",
   "scripts/validate-distribution.mjs",
@@ -324,7 +329,7 @@ export async function validateDistribution(
       errors.push(display(root, manifestPath) + ": manifest must be a JSON object");
     } else if (manifest !== undefined) {
       if (manifest.name !== "nuvetio") errors.push("Manifest name must be 'nuvetio'");
-      if (manifest.version !== "0.2.1") errors.push("Manifest version must be '0.2.1'");
+      if (manifest.version !== "0.2.2") errors.push("Manifest version must be '0.2.2'");
       if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
       if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
       const copyPath = path.join(root, "content/public-copy.es.json");

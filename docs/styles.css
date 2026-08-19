@@ -37,8 +37,50 @@ article, .example, .steps li { background: var(--surface); border: 1px solid #db
 blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 4px solid var(--blue); font-size: 1.1rem; }
 footer { display: flex; justify-content: space-between; gap: 1rem; padding: 2rem 1.25rem; border-top: 1px solid #dbe3f0; }
 footer nav { width: auto; margin: 0; padding: 0; }
+.nav-links { display: flex; gap: 1rem; align-items: center; }
+.hero-mascot { display: block; margin-bottom: 1rem; filter: drop-shadow(0 12px 22px #0005); }
+.section-kicker { margin: 0; color: var(--blue); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.team { padding-top: 4rem; }
+.team__intro { max-width: 54rem; }
+.team__intro h2 { margin-bottom: .75rem; }
+.team-map { position: relative; margin-top: 2rem; }
+.orchestrator { display: flex; align-items: center; gap: 1rem; width: min(34rem, 100%); margin: 0 auto 2.5rem; padding: 1rem 1.25rem; color: var(--white); background: linear-gradient(135deg, var(--navy), #155eef); border: 2px solid var(--teal); border-radius: 1rem; box-shadow: 0 1rem 2rem #08163222; }
+.orchestrator img { flex: 0 0 auto; border-radius: 50%; }
+.orchestrator strong, .orchestrator span { display: block; }
+.orchestrator strong { font-size: 1.15rem; }
+.orchestrator span { margin-top: .25rem; color: #e6f4ff; font-size: .95rem; line-height: 1.45; }
+.departments { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; position: relative; }
+.departments::before { content: ""; position: absolute; top: -1.25rem; left: 12%; right: 12%; border-top: 2px solid #b9c7dc; }
+.department { position: relative; min-height: 18rem; padding: 1.25rem; overflow: hidden; }
+.department::before { content: ""; position: absolute; top: -1.25rem; left: 50%; width: 2px; height: 1.25rem; background: #b9c7dc; }
+.department__number { margin: 0 0 .75rem; color: var(--blue); font-weight: 900; letter-spacing: .08em; }
+.department h3 { margin: 0; color: var(--navy); font-size: 1.2rem; line-height: 1.15; }
+.agent-name { margin: .55rem 0; color: var(--blue); font-weight: 800; }
+.department ul { margin: 0; padding-left: 1.1rem; }
+.department li { margin-top: .35rem; }
+.department--engineering { border-top: 4px solid #155eef; }
+.department--product { border-top: 4px solid #7c4dff; }
+.department--experience { border-top: 4px solid #0f9d91; }
+.department--quality { border-top: 4px solid #e28725; }
+.team-systems { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .55rem; margin: 1.25rem auto; padding: .8rem 1rem; color: var(--navy); background: #edf4ff; border: 1px solid #cbdaf2; border-radius: .75rem; text-align: center; }
+.team-systems span { padding: .15rem .55rem; color: var(--blue); background: var(--white); border-radius: .4rem; font-weight: 700; }
+.team-result { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: .75rem; padding: 1rem; color: var(--white); background: var(--navy); border-radius: .75rem; text-align: center; }
+.team-result strong { color: var(--teal-on-dark); font-size: 1.15rem; }
+.companion-note { margin-top: 1.5rem; padding: 1.15rem 1.25rem; background: #e9fbf9; border-left: 4px solid var(--teal); border-radius: .75rem; }
+.companion-note strong { color: var(--navy); }
+.companion-note p { margin: .35rem 0 .55rem; }
+.roadmap { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-top: 1rem; padding: 1rem 1.25rem; color: #52627c; border: 1px dashed #aab8ce; border-radius: .75rem; }
+.roadmap strong { color: var(--navy); }
+.roadmap span { padding: .15rem .55rem; background: #f0f3f8; border-radius: .4rem; }
+.roadmap small { flex-basis: 100%; }
 @media (max-width: 720px) {
   .hero__content { padding-top: 2rem; }
   .grid, .steps { grid-template-columns: 1fr; }
+  .nav-links { gap: .6rem; font-size: .9rem; }
+  .hero-mascot { margin-inline: auto; }
+  .orchestrator { align-items: flex-start; }
+  .departments { grid-template-columns: 1fr; }
+  .departments::before, .department::before { display: none; }
+  .department { min-height: auto; }
   footer { flex-direction: column; }
 }
