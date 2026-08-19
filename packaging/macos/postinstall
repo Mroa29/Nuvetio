@@ -1,0 +1,25 @@
+#!/bin/bash
+
+set -eu
+
+TARGET_VOLUME="${2:-/}"
+PACKAGE_ROOT="$TARGET_VOLUME/Users/Shared/Nuvetio"
+CONSOLE_USER="$(stat -f '%Su' /dev/console)"
+
+if [ "$CONSOLE_USER" = "root" ] || [ -z "$CONSOLE_USER" ]; then
+  echo "No se pudo identificar al usuario activo. Abre una sesión e intenta de nuevo." >&2
+  exit 1
+fi
+
+CODEX="$(su -l "$CONSOLE_USER" -c 'command -v codex' 2>/dev/null || true)"
+if [ -z "$CODEX" ]; then
+  echo "No encontramos Codex CLI. Instálalo y vuelve a ejecutar el instalador de Nuvetio." >&2
+  exit 1
+fi
+
+su -l "$CONSOLE_USER" -c "\"$CODEX\" plugin marketplace add \"$PACKAGE_ROOT\""
+su -l "$CONSOLE_USER" -c "\"$CODEX\" plugin add 'nuvetio@nuvetio'"
+
+if command -v osascript >/dev/null 2>&1; then
+  su -l "$CONSOLE_USER" -c "osascript -e 'display dialog \"Nuvetio quedó instalado en Codex. Abre una sesión nueva para comenzar.\" buttons {\"Aceptar\"} default button \"Aceptar\"'" || true
+fi

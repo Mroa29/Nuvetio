@@ -1,23 +1,22 @@
-NUVETIO 0.2.2 — GUÍA DE INICIO
+NUVETIO 0.3.0 — GUÍA DE INICIO
 
 Nuvetio es tu equipo experto de IA. Tú haces tus preguntas normalmente y sus departamentos especializados te ayudan a convertirlas en resultados profesionales de producto, diseño, inteligencia artificial e ingeniería.
 
 IMPORTANTE
 
-- Este paquete permite probar Nuvetio ahora en Codex CLI para Mac y Windows.
+- Los instaladores permiten probar Nuvetio ahora en Codex CLI para Mac y Windows.
 - No necesitas una cuenta de GitHub.
 - Nuvetio no tiene costo adicional. Tu cuenta de ChatGPT o Codex puede tener sus propios límites o costos.
 - Agent Skills es opcional y se instala solo si confirmas escribiendo SI.
 
 INSTALACIÓN CON DOBLE CLIC
 
-1. Descomprime Nuvetio-0.2.2.zip en Descargas.
-2. En Mac, abre installers/macos y haz doble clic en Instalar-Nuvetio.command.
-3. En Windows, abre installers/windows y haz doble clic en Instalar-Nuvetio.cmd.
-4. Confirma el mensaje de instalación y abre una sesión nueva de Codex CLI.
-5. Escribe normalmente lo que necesitas.
+1. Descarga `Nuvetio-0.3.0-Setup.exe` para Windows o `Nuvetio-0.3.0.pkg` para Mac.
+2. Abre el instalador y sigue Siguiente, Instalar y Finalizar.
+3. Confirma el mensaje de instalación y abre una sesión nueva de Codex CLI.
+4. Escribe normalmente lo que necesitas.
 
-Si Mac bloquea un archivo, haz clic derecho, elige Abrir y confirma una vez. Los instaladores no requieren permisos de administrador ni descargan código remoto.
+Puede aparecer una advertencia porque los instaladores todavía no están firmados. No descargan código remoto durante la instalación.
 
 COMPLEMENTO OPCIONAL: AGENT SKILLS
 

@@ -101,8 +101,7 @@
 ### Task 4: Build, verify, and publish
 
 **Files:**
-- Create outside repository: `C:\Users\socra\OneDrive\Documentos\ChatGPT\Entregas\Nuvetio-0.3.0\`
-- Create outside repository: `Nuvetio-0.3.0.zip`
+- Create outside repository: a versioned `Nuvetio-0.3.0` delivery folder and ZIP.
 
 - [ ] **Step 1: Build Windows artifact locally with IExpress**
 - [ ] **Step 2: Run an isolated Windows smoke test with a fake Codex and temporary `CODEX_HOME`**

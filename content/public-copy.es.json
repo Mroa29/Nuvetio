@@ -30,9 +30,9 @@
   "optionalCompanion": "Agent Skills: 24 workflows externos de Addy Osmani, instalables opcionalmente.",
   "futureDepartments": ["Marketing", "Operaciones", "Finanzas", "Legal"],
   "installSteps": [
-    "Descarga Nuvetio 0.2.2 y descomprime el ZIP en la carpeta Descargas.",
-    "En Mac, abre installers/macos y haz doble clic en Instalar-Nuvetio.command. En Windows, abre installers/windows y haz doble clic en Instalar-Nuvetio.cmd.",
-    "Confirma cuando la ventana indique que Nuvetio quedó instalado. No necesitas permisos de administrador ni debes pegar comandos.",
+    "Descarga el instalador de Nuvetio 0.3.0 para Windows o Mac desde esta página.",
+    "Abre el archivo y sigue los pasos Siguiente, Instalar y Finalizar. Puede aparecer una advertencia porque todavía no está firmado.",
+    "Confirma cuando la ventana indique que Nuvetio quedó instalado. No debes pegar comandos.",
     "Abre una sesión nueva de Codex CLI y escribe tu consulta normalmente. Si quieres ampliar el equipo, ejecuta después el instalador opcional de Agent Skills. La instalación directa en ChatGPT estará disponible después de publicar Nuvetio en su directorio de Plugins."
   ],
   "benefits": [
@@ -54,7 +54,7 @@
   },
   "troubleshooting": [
     "Antes de instalar Nuvetio, comprueba que Codex CLI esté instalado. Si la ventana dice que no lo encuentra, instala Codex y vuelve a ejecutar el instalador.",
-    "En Mac, si el sistema bloquea el archivo, haz clic derecho en Instalar-Nuvetio.command, elige Abrir y confirma una vez.",
+    "Si Windows o Mac muestran una advertencia, es porque esta primera versión todavía no tiene firma digital. Revisa que hayas descargado el instalador desde la página oficial.",
     "Después de instalarlo, inicia una sesión nueva de Codex CLI. Nuvetio quedará disponible sin crear una cuenta adicional."
   ]
 }

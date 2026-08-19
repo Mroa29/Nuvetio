@@ -19,6 +19,6 @@ Pregunta como siempre. Construye como un equipo profesional.
 
 Ayuda a convertir ideas y consultas en productos, experiencias, mockups, planes técnicos y resultados revisados con perspectivas profesionales de producto, IA, UX, ingeniería, calidad y seguridad.
 
-## Alcance de la versión 0.2.2
+## Alcance de la versión 0.3.0
 
-Nuvetio 0.2.2 es un envío skills-only. No incluye servidores MCP, conectores, autenticación, backend, telemetría ni recolección de datos. Incluye launchers locales para simplificar la instalación de Codex CLI en Mac y Windows y un complemento opcional, atribuido a Addy Osmani, que instala Agent Skills desde su repositorio público solo después de una confirmación explícita.
+Nuvetio 0.3.0 es un envío skills-only. No incluye servidores MCP, conectores, autenticación, backend, telemetría ni recolección de datos. Incluye instaladores nativos sin firma para simplificar la instalación de Codex CLI en Mac y Windows y un complemento opcional, atribuido a Addy Osmani, que instala Agent Skills desde su repositorio público solo después de una confirmación explícita.

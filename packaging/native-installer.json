@@ -1,0 +1,18 @@
+{
+  "version": "0.3.0",
+  "artifacts": [
+    "Nuvetio-0.3.0-Setup.exe",
+    "Nuvetio-0.3.0.pkg"
+  ],
+  "payload": [
+    ".agents",
+    "plugins",
+    "installers",
+    "addons",
+    "packaging/LEEME-PRIMERO.txt",
+    "docs/downloads/guia-rapida-nuvetio.pdf"
+  ],
+  "windowsBuilder": "IExpress",
+  "macosBuilder": "pkgbuild",
+  "openAiDistribution": "NOT SUBMITTED"
+}

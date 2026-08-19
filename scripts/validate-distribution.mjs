@@ -26,6 +26,11 @@ export const REQUIRED_FILES = [
   "plugins/nuvetio/skills/operate-nuvetio/references/experience-and-mockups.md",
   "plugins/nuvetio/skills/operate-nuvetio/references/delivery-and-quality.md",
   "addons/agent-skills.json",
+  "packaging/native-installer.json",
+  "packaging/macos/postinstall",
+  "scripts/build-windows-installer.ps1",
+  "scripts/build-macos-installer.sh",
+  ".github/workflows/build-installers.yml",
   "installers/macos/Instalar-Agent-Skills.command",
   "installers/windows/Instalar-Agent-Skills.ps1",
   "installers/windows/Instalar-Agent-Skills.cmd",
@@ -329,7 +334,7 @@ export async function validateDistribution(
       errors.push(display(root, manifestPath) + ": manifest must be a JSON object");
     } else if (manifest !== undefined) {
       if (manifest.name !== "nuvetio") errors.push("Manifest name must be 'nuvetio'");
-      if (manifest.version !== "0.2.2") errors.push("Manifest version must be '0.2.2'");
+      if (manifest.version !== "0.3.0") errors.push("Manifest version must be '0.3.0'");
       if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
       if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
       const copyPath = path.join(root, "content/public-copy.es.json");

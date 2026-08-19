@@ -1,0 +1,44 @@
+name: Build native installers
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm test
+      - run: npm run validate
+      - name: Build Windows installer
+        shell: pwsh
+        run: ./scripts/build-windows-installer.ps1 -Version 0.3.0 -OutputDirectory dist/native
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuvetio-windows-installer
+          path: dist/native/Nuvetio-0.3.0-Setup.exe*
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm test
+      - run: npm run validate
+      - name: Build Mac installer
+        run: bash ./scripts/build-macos-installer.sh 0.3.0 dist/native
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nuvetio-macos-installer
+          path: dist/native/Nuvetio-0.3.0.pkg*
