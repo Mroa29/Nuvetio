@@ -1,11 +1,14 @@
 import assert from "node:assert/strict";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const execFileAsync = promisify(execFile);
 
 test("public manifest and marketplace expose a skills-only Nuvetio plugin", async () => {
   const manifest = JSON.parse(
@@ -19,7 +22,7 @@ test("public manifest and marketplace expose a skills-only Nuvetio plugin", asyn
   );
 
   assert.equal(manifest.name, "nuvetio");
-  assert.equal(manifest.version, "0.2.0");
+  assert.equal(manifest.version, "0.2.1");
   assert.equal(manifest.skills, "./skills/");
   assert.equal("mcpServers" in manifest, false);
   assert.equal(manifest.author.name, "Marcos Roa");
@@ -138,14 +141,56 @@ test("site reuses the approved message and beginner installation flow", async ()
   assert.equal(copy.installSteps.length, 4);
   assert.equal(copy.benefits.length, 6);
   assert.equal(copy.prompts.length, 3);
-  assert.ok(copy.installSteps.some((step) => step.includes("Descarga Nuvetio 0.2.0")));
-  assert.ok(copy.installSteps.some((step) => step.includes("codex plugin marketplace add .")));
-  assert.ok(copy.installSteps.some((step) => step.includes("codex plugin add nuvetio@nuvetio")));
+  assert.ok(copy.installSteps.some((step) => step.includes("Descarga Nuvetio 0.2.1")));
+  assert.ok(copy.installSteps.some((step) => step.includes("Instalar-Nuvetio.command")));
+  assert.ok(copy.installSteps.some((step) => step.includes("Instalar-Nuvetio.cmd")));
+  assert.ok(copy.installSteps.some((step) => step.includes("No necesitas permisos de administrador")));
   assert.ok(copy.installSteps.some((step) => step.includes("instalación directa en ChatGPT estará disponible después")));
   assert.ok(copy.installSteps.every((step) => !step.includes("Busca Nuvetio, abre su ficha")));
   assert.match(home, new RegExp(copy.tagline.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   for (const step of copy.installSteps) assert.ok(home.includes(step));
   assert.ok(home.includes(copy.example.userPrompt));
+});
+
+test("platform installers provide a local, non-administrative Codex setup flow", async () => {
+  const launchers = {
+    macos: {
+      path: path.join(ROOT, "installers/macos/Instalar-Nuvetio.command"),
+      required: [
+        /command -v codex/,
+        /codex plugin marketplace add/,
+        /codex plugin add [^\n]*nuvetio@nuvetio/,
+        /Nuvetio.*instalado/i,
+      ],
+    },
+    windowsPowerShell: {
+      path: path.join(ROOT, "installers/windows/Instalar-Nuvetio.ps1"),
+      required: [
+        /Get-Command codex/,
+        /plugin marketplace add/,
+        /plugin add ['"]?nuvetio@nuvetio/,
+        /Nuvetio.*instalado/i,
+      ],
+    },
+    windowsCmd: {
+      path: path.join(ROOT, "installers/windows/Instalar-Nuvetio.cmd"),
+      required: [
+        /where codex/i,
+        /Instalar-Nuvetio\.ps1/i,
+        /ExecutionPolicy Bypass/i,
+      ],
+    },
+  };
+
+  for (const [name, launcher] of Object.entries(launchers)) {
+    const source = await readFile(launcher.path, "utf8");
+    assert.ok(source.length > 100, `${name} launcher must contain an actionable flow`);
+    for (const pattern of launcher.required) {
+      assert.match(source, pattern, `${name} launcher is missing ${pattern}`);
+    }
+    assert.doesNotMatch(source, /curl\s+[^\n|]*\|\s*(sh|bash)|irm\s+[^\n|]*\|\s*iex/i);
+    assert.doesNotMatch(source, /Start-Process\s+.*-Verb\s+RunAs/i);
+  }
 });
 
 test("quick-start HTML fits a phone viewport while preserving the A4 print layout", async () => {
@@ -331,7 +376,7 @@ test("public landing page offers the versioned Nuvetio ZIP", async () => {
 
   assert.match(
     html,
-    /href="https:\/\/github\.com\/Mroa29\/Nuvetio\/releases\/download\/v0\.2\.0\/Nuvetio-0\.2\.0\.zip"[^>]*>Descargar Nuvetio<\/a>/,
+    /href="https:\/\/github\.com\/Mroa29\/Nuvetio\/releases\/download\/v0\.2\.1\/Nuvetio-0\.2\.1\.zip"[^>]*>Descargar Nuvetio<\/a>/,
   );
 });
 
@@ -443,7 +488,7 @@ test("validator requires manifest starter prompts to use canonical public copy",
     path.join(root, "plugins/nuvetio/.codex-plugin/plugin.json"),
     JSON.stringify({
       name: "nuvetio",
-      version: "0.2.0",
+      version: "0.2.1",
       skills: "./skills/",
       interface: { defaultPrompt: ["Different prompt"] },
     }),
@@ -461,7 +506,7 @@ test("validator rejects release notes whose heading disagrees with the package v
   await mkdir(path.join(root, "submission"), { recursive: true });
   await writeFile(
     path.join(root, "package.json"),
-    JSON.stringify({ version: "0.2.0" }),
+    JSON.stringify({ version: "0.2.1" }),
     "utf8",
   );
   await writeFile(
@@ -472,7 +517,7 @@ test("validator rejects release notes whose heading disagrees with the package v
 
   const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
   assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
-    "submission/release-notes.md: heading must match package version 0.2.0",
+    "submission/release-notes.md: heading must match package version 0.2.1",
   ]);
 });
 

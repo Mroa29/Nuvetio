@@ -1,6 +1,6 @@
 {
   "name": "nuvetio-plugin",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Distribución pública y guía de inicio de Nuvetio.",
   "license": "MIT",

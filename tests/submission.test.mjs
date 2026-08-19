@@ -28,3 +28,15 @@ test("starter prompts match the public product scope", async () => {
   assert.ok(prompts.some((prompt) => /producto con IA/i.test(prompt)));
   assert.ok(prompts.some((prompt) => /mockup/i.test(prompt)));
 });
+
+test("official submission handoff states the portal prerequisites and pending status", async () => {
+  const handoff = await readFile(
+    path.join(ROOT, "submission/openai-portal-handoff.md"),
+    "utf8",
+  );
+  assert.match(handoff, /https:\/\/platform\.openai\.com\/apps-manage/);
+  assert.match(handoff, /Apps Management/i);
+  assert.match(handoff, /identidad.*verificad/i);
+  assert.match(handoff, /skills-only/i);
+  assert.match(handoff, /NOT SUBMITTED/);
+});

@@ -19,6 +19,6 @@ Pregunta como siempre. Construye como un equipo profesional.
 
 Ayuda a convertir ideas y consultas en productos, experiencias, mockups, planes técnicos y resultados revisados con perspectivas profesionales de producto, IA, UX, ingeniería, calidad y seguridad.
 
-## Alcance de la versión 0.1.0
+## Alcance de la versión 0.2.1
 
-Nuvetio 0.2.0 es un envío skills-only. No incluye servidores MCP, conectores, autenticación, backend, telemetría ni recolección de datos.
+Nuvetio 0.2.1 es un envío skills-only. No incluye servidores MCP, conectores, autenticación, backend, telemetría ni recolección de datos. Incluye launchers locales para simplificar la instalación de Codex CLI en Mac y Windows; no descargan código remoto ni requieren permisos de administrador.

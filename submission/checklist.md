@@ -1,4 +1,8 @@
-# Checklist de envío al portal
+# Checklist de envío al portal (Nuvetio 0.2.1)
+
+Estado actual: **NOT SUBMITTED**. Usa `openai-portal-handoff.md` como guía y detente antes de cualquier botón de envío o publicación.
+
+- [ ] Abrir el portal oficial: https://platform.openai.com/apps-manage.
 
 - [ ] Confirmar permiso de escritura en Apps Management.
 - [ ] Verificar la identidad individual de Marcos Roa.

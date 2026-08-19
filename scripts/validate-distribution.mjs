@@ -324,7 +324,7 @@ export async function validateDistribution(
       errors.push(display(root, manifestPath) + ": manifest must be a JSON object");
     } else if (manifest !== undefined) {
       if (manifest.name !== "nuvetio") errors.push("Manifest name must be 'nuvetio'");
-      if (manifest.version !== "0.2.0") errors.push("Manifest version must be '0.2.0'");
+      if (manifest.version !== "0.2.1") errors.push("Manifest version must be '0.2.1'");
       if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
       if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
       const copyPath = path.join(root, "content/public-copy.es.json");
