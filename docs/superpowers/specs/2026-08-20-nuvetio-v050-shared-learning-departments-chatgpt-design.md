@@ -1,7 +1,7 @@
 # Nuvetio v0.5 — aprendizaje compartido, departamentos activos y envío oficial
 
 **Fecha:** 2026-08-20  
-**Estado:** Diseño aprobado para revisión  
+**Estado:** Implementación local completada; pendiente revisión de integración y despliegue
 **Alcance:** puntos 3, 4 y 6 del roadmap de Nuvetio
 
 ## Objetivo
