@@ -259,7 +259,7 @@ test("optional Agent Skills companion is attributed and explicitly confirmed", a
 
 test("homepage presents the complete active Nuvetio team and mascot", async () => {
   const home = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
-  assert.match(home, /mascot-nuvetio\.svg/);
+  assert.match(home, /mascot-nuvetio\.png/);
   assert.match(home, /alt="Mascota de Nuvetio/i);
   assert.match(home, /id="equipo"/);
   for (const label of [
@@ -287,10 +287,8 @@ test("homepage presents the complete active Nuvetio team and mascot", async () =
   assert.match(home, /declaran sus límites profesionales/i);
   assert.match(home, /no necesitas saber de inteligencia artificial/i);
 
-  const mascot = await readFile(path.join(ROOT, "docs/assets/mascot-nuvetio.svg"), "utf8");
-  assert.match(mascot, /<svg\b/);
-  assert.match(mascot, /<title[^>]*>Nuvetio/i);
-  assert.match(mascot, /viewBox=/i);
+  const mascot = await readFile(path.join(ROOT, "docs/assets/mascot-nuvetio.png"));
+  assert.equal(mascot.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
 });
 
 test("quick-start HTML fits a phone viewport while preserving the A4 print layout", async () => {

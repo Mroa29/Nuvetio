@@ -18,7 +18,7 @@ nav, main, .hero__content, footer { width: min(68rem, 100%); margin-inline: auto
 nav { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.25rem; }
 nav a { color: inherit; }
 .brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 800; text-decoration: none; }
-.brand img { border-radius: .6rem; }
+.brand img { border-radius: .6rem; object-fit: cover; object-position: 50% 16%; }
 .hero__content { padding-top: 4rem; }
 .hero--compact { padding-bottom: 2.5rem; }
 .hero--compact .hero__content { padding-top: 1.5rem; }
@@ -38,14 +38,14 @@ blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 4px solid var(--bl
 footer { display: flex; justify-content: space-between; gap: 1rem; padding: 2rem 1.25rem; border-top: 1px solid #dbe3f0; }
 footer nav { width: auto; margin: 0; padding: 0; }
 .nav-links { display: flex; gap: 1rem; align-items: center; }
-.hero-mascot { display: block; margin-bottom: 1rem; filter: drop-shadow(0 12px 22px #0005); }
+.hero-mascot { display: block; width: 112px; height: 168px; margin-bottom: 1rem; object-fit: contain; filter: drop-shadow(0 12px 22px #0005); }
 .section-kicker { margin: 0; color: var(--blue); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
 .team { padding-top: 4rem; }
 .team__intro { max-width: 54rem; }
 .team__intro h2 { margin-bottom: .75rem; }
 .team-map { position: relative; margin-top: 2rem; }
 .orchestrator { display: flex; align-items: center; gap: 1rem; width: min(34rem, 100%); margin: 0 auto 2.5rem; padding: 1rem 1.25rem; color: var(--white); background: linear-gradient(135deg, var(--navy), #155eef); border: 2px solid var(--teal); border-radius: 1rem; box-shadow: 0 1rem 2rem #08163222; }
-.orchestrator img { flex: 0 0 auto; border-radius: 50%; }
+.orchestrator img { flex: 0 0 auto; border-radius: 50%; object-fit: cover; object-position: 50% 16%; }
 .orchestrator strong, .orchestrator span { display: block; }
 .orchestrator strong { font-size: 1.15rem; }
 .orchestrator span { margin-top: .25rem; color: #e6f4ff; font-size: .95rem; line-height: 1.45; }
@@ -82,9 +82,6 @@ footer nav { width: auto; margin: 0; padding: 0; }
 .team-diagram--visual figcaption { color: var(--white); }
 .team-diagram--visual figcaption span { color: #d9e9ff; }
 .team-diagram--visual img { box-shadow: 0 .9rem 2rem #07153666; }
-.team-visual-mascot { position: relative; overflow: hidden; line-height: 0; border-radius: .75rem; background: #071536; }
-.team-visual-mascot__overlay { position: absolute; z-index: 1; top: 50%; left: 50%; width: 22%; aspect-ratio: 1 / 1; transform: translate(-50%, -49%); display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle, #071536 0 56%, #071536e8 66%, transparent 78%); }
-.team-visual-mascot__overlay img { width: 105%; height: auto; box-shadow: none; filter: drop-shadow(0 .7rem 1rem #020a1dcc); }
 .team-diagram-details { margin-top: 1rem; }
 .team-diagram-details summary { width: fit-content; color: var(--blue); cursor: pointer; font-weight: 800; }
 dialog { width: min(34rem, calc(100% - 2rem)); padding: 0; color: var(--text); background: transparent; border: 0; border-radius: 1.1rem; box-shadow: 0 1.5rem 4rem #08163266; }
@@ -108,7 +105,6 @@ dialog::backdrop { background: #081632b8; backdrop-filter: blur(3px); }
   .team-diagram { padding: .5rem; overflow-x: auto; }
   .team-diagram img { min-width: 680px; }
   .team-diagram--visual img { min-width: 0; }
-  .team-visual-mascot__overlay { width: 28%; }
   .download-dialog__actions { align-items: stretch; flex-direction: column; }
   .download-dialog__actions .button, .download-dialog__close { width: 100%; text-align: center; }
   footer { flex-direction: column; }
