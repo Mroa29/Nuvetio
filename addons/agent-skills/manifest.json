@@ -1,0 +1,13 @@
+{
+  "name": "agent-skills",
+  "displayName": "Agent Skills",
+  "version": "0.6.7",
+  "upstream": "https://github.com/addyosmani/agent-skills",
+  "commit": "df1edb2e05487d0aa6d93c747141e0aed1187f25",
+  "author": "Addy Osmani",
+  "license": "MIT",
+  "optional": true,
+  "count": 24,
+  "runtimes": ["codex-cli", "claude-code"],
+  "verification": "Pin the upstream commit before network installation; review changes before activation."
+}
