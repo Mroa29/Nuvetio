@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Diagrama de departamentos de Nuvetio</title>
+  <desc id="desc">El Orquestador Nuvetio recibe la pregunta y coordina Producto e IA, Experiencia y Mockups, Ingeniería, Calidad y Seguridad, Core operativo, Marketing, Operaciones, Finanzas y Legal.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#081b3b"/><stop offset="1" stop-color="#123f75"/></linearGradient>
+    <style>
+      .card{fill:#fff;stroke:#a9c9ee;stroke-width:2}.consultive{fill:#fff5dc;stroke:#e6b94a}.title{font:700 20px Arial,sans-serif;fill:#0b2447}.agent{font:600 14px Arial,sans-serif;fill:#35608f}.label{font:500 13px Arial,sans-serif;fill:#17385e}.line{stroke:#8bb8e6;stroke-width:3;fill:none}.core{fill:#d9f7ef;stroke:#43b99b}.orchestrator{fill:#e6efff;stroke:#72a7e8;stroke-width:3}
+    </style>
+  </defs>
+  <rect width="1200" height="760" rx="28" fill="url(#bg)"/>
+  <text x="600" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-size="26" font-weight="700" fill="#fff">El equipo detrás de Nuvetio</text>
+  <rect class="orchestrator" x="390" y="66" width="420" height="82" rx="22"/>
+  <text class="title" x="600" y="100" text-anchor="middle">Orquestador Nuvetio</text>
+  <text class="agent" x="600" y="124" text-anchor="middle">Entiende, selecciona y coordina</text>
+  <path class="line" d="M600 148V190M190 190H1010M190 190V220M465 190V220M735 190V220M1010 190V220M325 190V500M875 190V500"/>
+  <g>
+    <rect class="card" x="45" y="220" width="290" height="116" rx="16"/><text class="title" x="190" y="255" text-anchor="middle">Producto e IA</text><text class="agent" x="190" y="279" text-anchor="middle">Product &amp; AI Agent</text><text class="label" x="190" y="304" text-anchor="middle">Problema · alcance · criterios de éxito</text>
+    <rect class="card" x="320" y="220" width="290" height="116" rx="16"/><text class="title" x="465" y="255" text-anchor="middle">Experiencia y Mockups</text><text class="agent" x="465" y="279" text-anchor="middle">Experience &amp; Mockups Agent</text><text class="label" x="465" y="304" text-anchor="middle">Flujos · wireframes · accesibilidad</text>
+    <rect class="card" x="595" y="220" width="290" height="116" rx="16"/><text class="title" x="740" y="255" text-anchor="middle">Ingeniería</text><text class="agent" x="740" y="279" text-anchor="middle">Engineering Agent</text><text class="label" x="740" y="304" text-anchor="middle">Arquitectura · TDD · documentación</text>
+    <rect class="card" x="870" y="220" width="290" height="116" rx="16"/><text class="title" x="1015" y="255" text-anchor="middle">Calidad y Seguridad</text><text class="agent" x="1015" y="279" text-anchor="middle">Quality &amp; Security Agent</text><text class="label" x="1015" y="304" text-anchor="middle">Pruebas · privacidad · riesgos</text>
+  </g>
+  <g>
+    <rect class="core" x="45" y="500" width="290" height="116" rx="16"/><text class="title" x="190" y="535" text-anchor="middle">Core operativo</text><text class="agent" x="190" y="559" text-anchor="middle">Skills · Memory · Validation Agent</text><text class="label" x="190" y="584" text-anchor="middle">Contexto · checks · reportes</text>
+    <rect class="consultive" x="320" y="500" width="290" height="116" rx="16"/><text class="title" x="465" y="535" text-anchor="middle">Marketing</text><text class="agent" x="465" y="559" text-anchor="middle">Marketing Agent · consultivo</text><text class="label" x="465" y="584" text-anchor="middle">Posicionamiento · audiencias</text>
+    <rect class="consultive" x="595" y="500" width="290" height="116" rx="16"/><text class="title" x="740" y="535" text-anchor="middle">Operaciones</text><text class="agent" x="740" y="559" text-anchor="middle">Operations Agent · consultivo</text><text class="label" x="740" y="584" text-anchor="middle">Procesos · SOP · mejora continua</text>
+    <rect class="consultive" x="870" y="500" width="290" height="116" rx="16"/><text class="title" x="1015" y="535" text-anchor="middle">Finanzas · Legal</text><text class="agent" x="1015" y="559" text-anchor="middle">Finance Agent · Legal Agent</text><text class="label" x="1015" y="584" text-anchor="middle">Costos · contratos · cumplimiento</text>
+  </g>
+  <text x="600" y="690" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#dcecff">Los departamentos consultivos orientan; no sustituyen profesionales acreditados.</text>
+</svg>

@@ -73,6 +73,11 @@ footer nav { width: auto; margin: 0; padding: 0; }
 .roadmap strong { color: var(--navy); }
 .roadmap span { padding: .15rem .55rem; background: #f0f3f8; border-radius: .4rem; }
 .roadmap small { flex-basis: 100%; }
+.team-diagram { margin: 1.5rem 0 0; padding: 1rem; background: #f6f8fc; border: 1px solid #dbe3f0; border-radius: 1rem; }
+.team-diagram figcaption { display: flex; flex-wrap: wrap; gap: .5rem 1rem; align-items: baseline; margin-bottom: .8rem; color: var(--navy); }
+.team-diagram figcaption strong { font-size: 1.15rem; }
+.team-diagram figcaption span { color: #52627c; }
+.team-diagram img { display: block; width: 100%; height: auto; border-radius: .75rem; }
 @media (max-width: 720px) {
   .hero__content { padding-top: 2rem; }
   .grid, .steps { grid-template-columns: 1fr; }
@@ -82,5 +87,7 @@ footer nav { width: auto; margin: 0; padding: 0; }
   .departments { grid-template-columns: 1fr; }
   .departments::before, .department::before { display: none; }
   .department { min-height: auto; }
+  .team-diagram { padding: .5rem; overflow-x: auto; }
+  .team-diagram img { min-width: 680px; }
   footer { flex-direction: column; }
 }
