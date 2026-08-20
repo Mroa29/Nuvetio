@@ -42,7 +42,7 @@
 
   <path d="M106 224c16-16 38-24 74-24s58 8 74 24l27 105c-28 25-61 37-101 37s-73-12-101-37Z" fill="url(#body)" stroke="#bffcf7" stroke-width="6"/>
   <circle cx="180" cy="284" r="38" fill="#071a42" stroke="#36cfc9" stroke-width="5"/>
-  <path d="M180 260v47M157 283h46" stroke="url(#chest)" stroke-linecap="round" stroke-width="10"/>
+  <text x="180" y="303" text-anchor="middle" fill="url(#chest)" font-family="Arial, sans-serif" font-size="54" font-weight="800">N</text>
   <circle cx="87" cy="255" r="12" fill="#bffcf7"/>
   <circle cx="273" cy="255" r="12" fill="#bffcf7"/>
   <path d="M92 336c23 16 48 24 88 24s65-8 88-24" fill="none" stroke="#36cfc9" stroke-linecap="round" stroke-width="7"/>
