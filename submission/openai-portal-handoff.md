@@ -4,6 +4,11 @@
 **Versión preparada:** Nuvetio 0.4.0
 **Tipo:** `skills-only` (sin MCP, conectores, backend ni autenticación externa)
 
+La preparación v0.5 añade un Worker Cloudflare + D1 opcional para aprendizaje
+compartido anonimizado. No es necesario para usar las skills y no debe incluirse
+como requisito obligatorio del envío. Consulta `v050-submission-notes.md` para
+la evidencia y los límites actualizados.
+
 ## Portal
 
 Abrir el portal oficial de gestión de aplicaciones: <https://platform.openai.com/apps-manage>.

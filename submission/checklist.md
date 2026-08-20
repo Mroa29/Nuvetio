@@ -1,6 +1,6 @@
 # Checklist de envío al portal (Nuvetio 0.4.0)
 
-Estado actual: **NOT SUBMITTED**. Usa `openai-portal-handoff.md` como guía y detente antes de cualquier botón de envío o publicación.
+Estado actual: **NOT SUBMITTED**. Usa `openai-portal-handoff.md` y `v050-submission-notes.md` como guía; detente antes de cualquier botón de envío o publicación.
 
 - [ ] Abrir el portal oficial: https://platform.openai.com/apps-manage.
 
