@@ -21,11 +21,13 @@ jobs:
       - run: npm run validate
       - name: Build Windows installer
         shell: pwsh
-        run: ./scripts/build-windows-installer.ps1 -Version 0.4.0 -OutputDirectory dist/native
+        run: |
+          $version = $env:GITHUB_REF_NAME -replace '^v', ''
+          ./scripts/build-windows-installer.ps1 -Version $version -OutputDirectory dist/native
       - uses: actions/upload-artifact@v4
         with:
           name: nuvetio-windows-installer
-          path: dist/native/Nuvetio-0.4.0-Setup.exe*
+          path: dist/native/Nuvetio-*-Setup.exe*
 
   macos:
     runs-on: macos-latest
@@ -37,8 +39,8 @@ jobs:
       - run: npm test
       - run: npm run validate
       - name: Build Mac installer
-        run: bash ./scripts/build-macos-installer.sh 0.4.0 dist/native
+        run: bash ./scripts/build-macos-installer.sh "${GITHUB_REF_NAME#v}" dist/native
       - uses: actions/upload-artifact@v4
         with:
           name: nuvetio-macos-installer
-          path: dist/native/Nuvetio-0.4.0.pkg*
+          path: dist/native/Nuvetio-*.pkg*

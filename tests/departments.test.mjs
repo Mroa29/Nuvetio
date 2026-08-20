@@ -10,7 +10,7 @@ test("department catalog and public diagram expose the complete Nuvetio team", a
   const catalog = JSON.parse(await readFile(path.join(ROOT, "departments/nuvetio-departments.json"), "utf8"));
   const diagram = await readFile(path.join(ROOT, "docs/assets/nuvetio-departments.svg"), "utf8");
   const home = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
-  assert.equal(catalog.version, "0.4.0");
+  assert.equal(catalog.version, "0.5.0");
   assert.equal(catalog.departments.length, 10);
   for (const department of catalog.departments) {
     assert.ok(department.agents.length > 0, department.id);

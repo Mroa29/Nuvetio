@@ -1,7 +1,7 @@
 ---
 name: nuvetio
 description: Coordinar consultas de producto, IA, experiencia, ingeniería, calidad y departamentos consultivos con resultados profesionales.
-version: 0.4.0
+version: 0.5.0
 ---
 
 # Nuvetio

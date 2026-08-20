@@ -10,7 +10,7 @@ Sitio público: <https://mroa29.github.io/Nuvetio/>
 
 ## Para usuarios
 
-1. Descarga el instalador para Windows (`Nuvetio-0.4.0-Setup.exe`) o Mac (`Nuvetio-0.4.0.pkg`) desde la release.
+1. Descarga el instalador para Windows (`Nuvetio-0.5.0-Setup.exe`) o Mac (`Nuvetio-0.5.0.pkg`) desde la release.
 2. Ábrelo y sigue `Siguiente`, `Instalar` y `Finalizar`. Puede aparecer una advertencia porque el instalador todavía no está firmado.
 3. Abre una sesión nueva de Codex, Codex Desktop o Claude Code y escribe tu consulta normalmente. Si no tienes Codex CLI, el instalador no falla: puedes elegir Claude Code o instalarlo después.
 
@@ -18,7 +18,7 @@ Nuvetio ofrece adaptadores para Codex CLI/Desktop y Claude Code. Agent Skills se
 
 ## Para colaboradores
 
-El repositorio contiene el manifiesto público, las skills estáticas, los adaptadores Codex/Claude, el complemento opcional Agent Skills, los instaladores nativos, el catálogo de departamentos, la base local de aprendizaje consentido, el sitio de documentación y las comprobaciones de distribución de Nuvetio. La versión 0.4.0 no habilita todavía telemetría, conectores ni MCP.
+El repositorio contiene el manifiesto público, las skills estáticas, los adaptadores Codex/Claude, el complemento opcional Agent Skills, los instaladores nativos, el catálogo de departamentos, la base local de aprendizaje consentido, el Worker/D1 opcional, el sitio de documentación y las comprobaciones de distribución de Nuvetio. La versión 0.5.0 no habilita telemetría, conectores ni MCP.
 
 ```powershell
 npm test

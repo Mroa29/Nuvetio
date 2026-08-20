@@ -22,7 +22,7 @@ test("public manifest and marketplace expose a skills-only Nuvetio plugin", asyn
   );
 
   assert.equal(manifest.name, "nuvetio");
-  assert.equal(manifest.version, "0.4.0");
+  assert.equal(manifest.version, "0.5.0");
   assert.equal(manifest.skills, "./skills/");
   assert.equal("mcpServers" in manifest, false);
   assert.equal(manifest.author.name, "Marcos Roa");
@@ -141,7 +141,7 @@ test("site reuses the approved message and beginner installation flow", async ()
   assert.equal(copy.installSteps.length, 4);
   assert.equal(copy.benefits.length, 6);
   assert.equal(copy.prompts.length, 3);
-  assert.ok(copy.installSteps.some((step) => step.includes("instalador de Nuvetio 0.4.0")));
+  assert.ok(copy.installSteps.some((step) => step.includes("instalador de Nuvetio 0.5.0")));
   assert.ok(copy.installSteps.some((step) => step.includes("Siguiente, Instalar y Finalizar")));
   assert.ok(copy.installSteps.some((step) => step.includes("todavía no está firmado")));
   assert.ok(copy.installSteps.some((step) => step.includes("video de presentación")));
@@ -192,11 +192,11 @@ test("platform installers provide a local, non-administrative Codex setup flow",
   }
 });
 
-test("0.4.0 market contract includes Claude, departments, learning, and deferred video", async () => {
+test("0.5.0 market contract includes Claude, departments, learning, and deferred video", async () => {
   const metadata = JSON.parse(
     await readFile(path.join(ROOT, "packaging/native-installer.json"), "utf8"),
   );
-  assert.equal(metadata.version, "0.4.0");
+  assert.equal(metadata.version, "0.5.0");
   assert.equal(metadata.video, "DEFERRED");
   assert.deepEqual(metadata.runtimes, ["codex-cli", "codex-desktop", "claude-code"]);
 
@@ -214,7 +214,7 @@ test("0.4.0 market contract includes Claude, departments, learning, and deferred
   }
 
   const home = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
-  assert.match(home, /Nuvetio-0\.4\.0/);
+  assert.match(home, /Nuvetio-0\.5\.0/);
   assert.match(home, /Claude Code/i);
   assert.match(home, /video.*pendiente|pendiente.*video/i);
 });
@@ -474,7 +474,7 @@ test("public landing page offers the Windows native installer", async () => {
 
   assert.match(
     html,
-    /href="https:\/\/github\.com\/Mroa29\/Nuvetio\/releases\/download\/v0\.4\.0\/Nuvetio-0\.4\.0-Setup\.exe"[^>]*>Descargar instalador para Windows<\/a>/,
+    /href="https:\/\/github\.com\/Mroa29\/Nuvetio\/releases\/download\/v0\.5\.0\/Nuvetio-0\.5\.0-Setup\.exe"[^>]*>Descargar instalador para Windows<\/a>/,
   );
 });
 
@@ -482,10 +482,10 @@ test("native installer sources are versioned, local, and covered by CI", async (
   const metadata = JSON.parse(
     await readFile(path.join(ROOT, "packaging/native-installer.json"), "utf8"),
   );
-  assert.equal(metadata.version, "0.4.0");
+  assert.equal(metadata.version, "0.5.0");
   assert.deepEqual(metadata.artifacts, [
-    "Nuvetio-0.4.0-Setup.exe",
-    "Nuvetio-0.4.0.pkg",
+    "Nuvetio-0.5.0-Setup.exe",
+    "Nuvetio-0.5.0.pkg",
   ]);
 
   const files = {
@@ -511,10 +511,10 @@ test("native installer sources are versioned, local, and covered by CI", async (
 
 test("homepage exposes native installers and hides the ZIP fallback", async () => {
   const html = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
-  assert.match(html, /Nuvetio-0\.4\.0-Setup\.exe/);
-  assert.match(html, /Nuvetio-0\.4\.0\.pkg/);
+  assert.match(html, /Nuvetio-0\.5\.0-Setup\.exe/);
+  assert.match(html, /Nuvetio-0\.5\.0\.pkg/);
   assert.match(html, /guia-rapida-nuvetio\.pdf/);
-  assert.doesNotMatch(html, /releases\/download\/v0\.4\.0\/Nuvetio-0\.4\.0\.zip/);
+  assert.doesNotMatch(html, /releases\/download\/v0\.5\.0\/Nuvetio-0\.5\.0\.zip/);
 });
 
 test("validator resolves unquoted href and src attributes", async (t) => {
@@ -625,7 +625,7 @@ test("validator requires manifest starter prompts to use canonical public copy",
     path.join(root, "plugins/nuvetio/.codex-plugin/plugin.json"),
     JSON.stringify({
       name: "nuvetio",
-      version: "0.4.0",
+      version: "0.5.0",
       skills: "./skills/",
       interface: { defaultPrompt: ["Different prompt"] },
     }),
@@ -643,7 +643,7 @@ test("validator rejects release notes whose heading disagrees with the package v
   await mkdir(path.join(root, "submission"), { recursive: true });
   await writeFile(
     path.join(root, "package.json"),
-    JSON.stringify({ version: "0.4.0" }),
+    JSON.stringify({ version: "0.5.0" }),
     "utf8",
   );
   await writeFile(
@@ -654,7 +654,7 @@ test("validator rejects release notes whose heading disagrees with the package v
 
   const { validateDistribution } = await import("../scripts/validate-distribution.mjs");
   assert.deepEqual(await validateDistribution(root, { requiredFiles: [] }), [
-      "submission/release-notes.md: heading must match package version 0.4.0",
+    "submission/release-notes.md: heading must match package version 0.5.0",
   ]);
 });
 

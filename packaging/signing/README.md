@@ -1,6 +1,6 @@
 # Firma de instaladores
 
-La release candidate 0.4.0 se distribuye **UNSIGNED**. El instalador puede
+La release candidate 0.5.0 se distribuye **UNSIGNED**. El instalador puede
 mostrar una advertencia del sistema hasta que el equipo aporte certificados.
 No se debe afirmar que está firmado o notarizado sin verificar la firma en un
 equipo limpio.

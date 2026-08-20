@@ -12,7 +12,7 @@ test("release candidate is explicit about unsigned artifacts and pending submiss
   const signing = await readFile(path.join(ROOT, "packaging/signing/README.md"), "utf8");
   const handoff = await readFile(path.join(ROOT, "submission/openai-portal-handoff.md"), "utf8");
   const home = await readFile(path.join(ROOT, "docs/index.html"), "utf8");
-  assert.equal(metadata.version, "0.4.0");
+  assert.equal(metadata.version, "0.5.0");
   assert.equal(metadata.video, "DEFERRED");
   assert.equal(metadata.openAiDistribution, "NOT SUBMITTED");
   assert.equal(metadata.signing.status, "UNSIGNED");

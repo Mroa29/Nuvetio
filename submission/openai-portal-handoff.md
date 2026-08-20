@@ -1,7 +1,7 @@
 # Handoff para el portal oficial de OpenAI
 
 **Estado:** `NOT SUBMITTED`
-**Versión preparada:** Nuvetio 0.4.0
+**Versión preparada:** Nuvetio 0.5.0
 **Tipo:** `skills-only` (sin MCP, conectores, backend ni autenticación externa)
 
 La preparación v0.5 añade un Worker Cloudflare + D1 opcional para aprendizaje
@@ -27,7 +27,7 @@ La persona que envíe el plugin debe tener permiso de escritura en **Apps Manage
 - **Términos:** <https://mroa29.github.io/Nuvetio/terminos.html>
 - **Bundle y código público:** <https://github.com/Mroa29/Nuvetio/tree/main/plugins/nuvetio>
 
-Usar la descripción corta y larga de `listing.es.md`, los tres starter prompts de `starter-prompts.es.json` y los casos de `test-cases.json`. La release de referencia será <https://github.com/Mroa29/Nuvetio/releases/tag/v0.4.0> una vez publicada.
+Usar la descripción corta y larga de `listing.es.md`, los tres starter prompts de `starter-prompts.es.json` y los casos de `test-cases.json`. La release de referencia será <https://github.com/Mroa29/Nuvetio/releases/tag/v0.5.0> una vez publicada.
 
 Agent Skills se declara como complemento upstream opcional, no como infraestructura propia de Nuvetio: <https://github.com/addyosmani/agent-skills>. Su autoría y licencia MIT deben mantenerse visibles. El paquete incluye adaptadores para Codex y Claude Code.
 

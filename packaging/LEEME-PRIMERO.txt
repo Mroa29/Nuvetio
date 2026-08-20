@@ -1,4 +1,4 @@
-NUVETIO 0.4.0 — GUÍA DE INICIO
+NUVETIO 0.5.0 — GUÍA DE INICIO
 
 Nuvetio es tu equipo experto de IA. Tú haces tus preguntas normalmente y sus departamentos especializados te ayudan a convertirlas en resultados profesionales de producto, diseño, inteligencia artificial e ingeniería.
 
@@ -11,7 +11,7 @@ IMPORTANTE
 
 INSTALACIÓN CON DOBLE CLIC
 
-1. Descarga `Nuvetio-0.4.0-Setup.exe` para Windows o `Nuvetio-0.4.0.pkg` para Mac.
+1. Descarga `Nuvetio-0.5.0-Setup.exe` para Windows o `Nuvetio-0.5.0.pkg` para Mac.
 2. Abre el instalador y sigue Siguiente, Instalar y Finalizar.
 3. Confirma el mensaje de instalación y abre una sesión nueva de Codex o Claude Code.
 4. Escribe normalmente lo que necesitas.
