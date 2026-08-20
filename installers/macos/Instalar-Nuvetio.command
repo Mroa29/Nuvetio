@@ -47,9 +47,16 @@ if [ -z "$CODEX" ] && [ "${NUVETIO_INSTALL_NONINTERACTIVE:-}" != "1" ]; then
   CODEX="$(command -v codex 2>/dev/null || true)"
 fi
 
+CODEX_ACTIVATED=0
 if [ -n "$CODEX" ]; then
-  "$CODEX" plugin marketplace add "$PACKAGE_ROOT" || fail 'Codex no pudo registrar el marketplace local.'
-  "$CODEX" plugin add 'nuvetio@nuvetio' || fail 'Codex no pudo activar el plugin.'
+  if "$CODEX" plugin marketplace add "$PACKAGE_ROOT" && "$CODEX" plugin add 'nuvetio@nuvetio'; then
+    CODEX_ACTIVATED=1
+  else
+    printf '%s\n' 'Codex CLI está instalado, pero no se pudo ejecutar desde este usuario. Nuvetio no quedó activado en Codex.' >&2
+  fi
+fi
+
+if [ "$CODEX_ACTIVATED" = "1" ]; then
   printf '%s\n' 'Nuvetio quedó instalado en Codex.' 'Abre una sesión nueva de Codex para comenzar.'
 elif command -v claude >/dev/null 2>&1; then
   install_claude_adapter

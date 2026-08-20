@@ -35,21 +35,25 @@ if (-not $codexCommand -and $env:NUVETIO_INSTALL_NONINTERACTIVE -ne '1') {
     }
 }
 
+$codexActivated = $false
 if ($codexCommand) {
-    & $codexCommand.Source plugin marketplace add $packageRoot
-    if ($LASTEXITCODE -ne 0) {
-        Stop-Installation 'Codex no pudo registrar el marketplace local.'
+    try {
+        & $codexCommand.Source plugin marketplace add $packageRoot
+        if ($LASTEXITCODE -ne 0) { throw 'marketplace add failed' }
+        & $codexCommand.Source plugin add 'nuvetio@nuvetio'
+        if ($LASTEXITCODE -ne 0) { throw 'plugin add failed' }
+        $codexActivated = $true
+    } catch {
+        Write-Host 'Codex CLI está instalado, pero no se pudo ejecutar desde este usuario. Nuvetio no quedó activado en Codex.' -ForegroundColor Yellow
     }
+}
 
-    & $codexCommand.Source plugin add 'nuvetio@nuvetio'
-    if ($LASTEXITCODE -ne 0) {
-        Stop-Installation 'Codex no pudo activar el plugin.'
-    }
+if ($codexActivated) {
     Write-Host 'Nuvetio quedó instalado en Codex.' -ForegroundColor Green
     Write-Host 'Abre una sesión nueva de Codex para comenzar.'
 } elseif (Get-Command claude -ErrorAction SilentlyContinue) {
     Install-ClaudeAdapter
-  Write-Host 'Nuvetio quedó copiado correctamente.' -ForegroundColor Green
+    Write-Host 'Nuvetio quedó copiado correctamente.' -ForegroundColor Green
     Write-Host 'Detectamos Claude Code; consulta la guía para activar el adaptador de Nuvetio.'
     Write-Host 'Codex CLI es opcional y no es necesario para continuar.'
 } else {
