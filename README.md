@@ -14,7 +14,7 @@ Sitio público: <https://mroa29.github.io/Nuvetio/>
 2. Ábrelo y sigue `Siguiente`, `Instalar` y `Finalizar`. Puede aparecer una advertencia porque el instalador todavía no está firmado.
 3. Abre una sesión nueva de Codex, Codex Desktop o Claude Code y escribe tu consulta normalmente. Si no tienes Codex CLI, el instalador no falla: puedes elegir Claude Code o instalarlo después.
 
-Nuvetio ofrece adaptadores para Codex CLI/Desktop y Claude Code. Agent Skills se activa aparte y solo después de tu confirmación. El aprendizaje compartido pregunta “¿Te fue útil?”, anonimiza y guarda una cola local; no modifica modelos automáticamente. La publicación directa en ChatGPT queda pendiente de revisión oficial. El video de presentación queda pendiente para una versión posterior.
+Nuvetio ofrece adaptadores para Codex CLI/Desktop y Claude Code. Agent Skills se activa aparte y solo después de tu confirmación. El aprendizaje local y el aporte compartido anonimizado tienen consentimientos independientes; los candidatos vencen a los 90 días y no modifican modelos automáticamente. La publicación directa en ChatGPT queda pendiente de revisión oficial. El video de presentación queda pendiente para una versión posterior.
 
 ## Para colaboradores
 
