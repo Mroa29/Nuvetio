@@ -28,6 +28,15 @@ maybe_install_codex() {
   fi
 }
 
+install_claude_adapter() {
+  CLAUDE_HOME="${HOME}/.claude"
+  mkdir -p "$CLAUDE_HOME/skills/nuvetio"
+  cp "$PACKAGE_ROOT/adapters/claude/skills/nuvetio/SKILL.md" "$CLAUDE_HOME/skills/nuvetio/SKILL.md"
+  if [ ! -f "$CLAUDE_HOME/CLAUDE.md" ]; then
+    cp "$PACKAGE_ROOT/adapters/claude/CLAUDE.md" "$CLAUDE_HOME/CLAUDE.md"
+  fi
+}
+
 CODEX="$(command -v codex 2>/dev/null || true)"
 if [ -z "$CODEX" ] && [ "${NUVETIO_INSTALL_NONINTERACTIVE:-}" != "1" ]; then
   printf '%s' 'No encontramos Codex CLI. ¿Quieres instalarlo desde npm ahora? [s/N] '
@@ -43,6 +52,7 @@ if [ -n "$CODEX" ]; then
   "$CODEX" plugin add 'nuvetio@nuvetio' || fail 'Codex no pudo activar el plugin.'
   printf '%s\n' 'Nuvetio quedó instalado en Codex.' 'Abre una sesión nueva de Codex para comenzar.'
 elif command -v claude >/dev/null 2>&1; then
+  install_claude_adapter
   printf '%s\n' 'Nuvetio quedó copiado correctamente.' 'Detectamos Claude Code; consulta la guía para activar el adaptador de Nuvetio.'
   printf '%s\n' 'Codex CLI es opcional y no es necesario para continuar.'
 else

@@ -13,6 +13,17 @@ if (-not (Test-Path -LiteralPath $marketplace -PathType Leaf)) {
     Stop-Installation 'el paquete está incompleto; vuelve a descargarlo desde la página oficial.'
 }
 
+function Install-ClaudeAdapter {
+    $claudeHome = Join-Path $env:USERPROFILE '.claude'
+    $skillDestination = Join-Path $claudeHome 'skills\nuvetio'
+    New-Item -ItemType Directory -Force -Path $skillDestination | Out-Null
+    Copy-Item -LiteralPath (Join-Path $packageRoot 'adapters\claude\skills\nuvetio\SKILL.md') -Destination (Join-Path $skillDestination 'SKILL.md') -Force
+    $claudeInstructions = Join-Path $claudeHome 'CLAUDE.md'
+    if (-not (Test-Path -LiteralPath $claudeInstructions -PathType Leaf)) {
+        Copy-Item -LiteralPath (Join-Path $packageRoot 'adapters\claude\CLAUDE.md') -Destination $claudeInstructions
+    }
+}
+
 if (-not $codexCommand -and $env:NUVETIO_INSTALL_NONINTERACTIVE -ne '1') {
     $answer = Read-Host 'No encontramos Codex CLI. ¿Quieres instalarlo desde npm ahora? [s/N]'
     if ($answer -match '^(s|si|sí|y|yes)$' -and (Get-Command npm -ErrorAction SilentlyContinue)) {
@@ -37,7 +48,8 @@ if ($codexCommand) {
     Write-Host 'Nuvetio quedó instalado en Codex.' -ForegroundColor Green
     Write-Host 'Abre una sesión nueva de Codex para comenzar.'
 } elseif (Get-Command claude -ErrorAction SilentlyContinue) {
-    Write-Host 'Nuvetio quedó copiado correctamente.' -ForegroundColor Green
+    Install-ClaudeAdapter
+  Write-Host 'Nuvetio quedó copiado correctamente.' -ForegroundColor Green
     Write-Host 'Detectamos Claude Code; consulta la guía para activar el adaptador de Nuvetio.'
     Write-Host 'Codex CLI es opcional y no es necesario para continuar.'
 } else {
