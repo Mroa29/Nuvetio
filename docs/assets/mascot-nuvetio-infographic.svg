@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 380" role="img" aria-labelledby="title desc">
+  <title id="title">Mascota virtual de Nuvetio</title>
+  <desc id="desc">Guía robot azul y turquesa que conecta los departamentos especializados de Nuvetio.</desc>
+  <defs>
+    <linearGradient id="head" x1="60" y1="40" x2="300" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#57e6f1"/>
+      <stop offset=".45" stop-color="#2e8cff"/>
+      <stop offset="1" stop-color="#123475"/>
+    </linearGradient>
+    <linearGradient id="body" x1="70" y1="220" x2="285" y2="370" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8af3f3"/>
+      <stop offset=".42" stop-color="#3196e9"/>
+      <stop offset="1" stop-color="#112c66"/>
+    </linearGradient>
+    <linearGradient id="chest" x1="135" y1="260" x2="225" y2="335" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#bffcf7"/>
+      <stop offset="1" stop-color="#36cfc9"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <ellipse cx="180" cy="367" rx="96" ry="11" fill="#081632" opacity=".42"/>
+  <path d="M111 219c-31 7-52 29-60 56 22 10 46 8 70-10" fill="none" stroke="#37d8e1" stroke-linecap="round" stroke-width="14"/>
+  <path d="M249 219c31 7 52 29 60 56-22 10-46 8-70-10" fill="none" stroke="#37d8e1" stroke-linecap="round" stroke-width="14"/>
+
+  <rect x="66" y="38" width="228" height="190" rx="72" fill="url(#head)" stroke="#bffcf7" stroke-width="6"/>
+  <rect x="91" y="76" width="178" height="126" rx="52" fill="#071a42" stroke="#56e5f0" stroke-width="5"/>
+  <circle cx="141" cy="132" r="18" fill="#fff"/>
+  <circle cx="219" cy="132" r="18" fill="#fff"/>
+  <circle cx="141" cy="134" r="7" fill="#071a42"/>
+  <circle cx="219" cy="134" r="7" fill="#071a42"/>
+  <path d="M151 170c16 15 42 15 58 0" fill="none" stroke="#bffcf7" stroke-linecap="round" stroke-width="7"/>
+
+  <path d="M71 103c-21 6-30 23-24 45 4 14 14 23 29 25" fill="none" stroke="#36cfc9" stroke-width="12"/>
+  <path d="M289 103c21 6 30 23 24 45-4 14-14 23-29 25" fill="none" stroke="#36cfc9" stroke-width="12"/>
+  <path d="M280 155c38 2 47 19 43 45" fill="none" stroke="#bffcf7" stroke-linecap="round" stroke-width="7"/>
+  <circle cx="315" cy="205" r="9" fill="#bffcf7"/>
+  <circle cx="180" cy="25" r="14" fill="#36cfc9" filter="url(#glow)"/>
+
+  <path d="M106 224c16-16 38-24 74-24s58 8 74 24l27 105c-28 25-61 37-101 37s-73-12-101-37Z" fill="url(#body)" stroke="#bffcf7" stroke-width="6"/>
+  <circle cx="180" cy="284" r="38" fill="#071a42" stroke="#36cfc9" stroke-width="5"/>
+  <path d="M180 260v47M157 283h46" stroke="url(#chest)" stroke-linecap="round" stroke-width="10"/>
+  <circle cx="87" cy="255" r="12" fill="#bffcf7"/>
+  <circle cx="273" cy="255" r="12" fill="#bffcf7"/>
+  <path d="M92 336c23 16 48 24 88 24s65-8 88-24" fill="none" stroke="#36cfc9" stroke-linecap="round" stroke-width="7"/>
+</svg>
