@@ -8,5 +8,6 @@ coverage/
 dist/
 build/
 tmp/
+.worktrees/
 *.pem
 *.key
