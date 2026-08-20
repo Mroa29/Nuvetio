@@ -25,12 +25,12 @@ test("learning is consent-first, redacted, local, and never an automatic model u
 
   const candidate = createFeedback({ consent: "granted", rating: "useful", text: "La respuesta fue clara.", now: "2026-08-20T00:00:00.000Z" });
   assert.equal(candidate.accepted, true);
-  assert.equal(candidate.record.schemaVersion, "0.4.0");
+  assert.equal(candidate.record.schemaVersion, "0.5.0");
   assert.equal(candidate.record.safeText, "La respuesta fue clara.");
 
   const directory = await mkdtemp(path.join(os.tmpdir(), "nuvetio-learning-"));
   try {
-    const queued = await enqueueFeedback({ directory, consent: "granted", rating: "mixed", text: "Útil, pero faltó un ejemplo." });
+    const queued = await enqueueFeedback({ directory, consent: "granted", sharedConsent: "denied", rating: "mixed", text: "Útil, pero faltó un ejemplo." });
     assert.equal(queued.accepted, true);
     const records = await readQueue(queued.file);
     assert.equal(records.length, 1);

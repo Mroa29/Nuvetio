@@ -1,11 +1,15 @@
 {
-  "version": "0.4.0",
+  "version": "0.5.0",
   "record": "nuvetio-feedback-candidate",
-  "required": ["schemaVersion", "createdAt", "consent", "rating", "safeText", "redactions"],
+  "required": ["schemaVersion", "candidateId", "createdAt", "expiresAt", "status", "consent", "sharedConsent", "rating", "safeText", "redactions"],
   "properties": {
-    "schemaVersion": {"type":"string","const":"0.4.0"},
+    "schemaVersion": {"type":"string","const":"0.5.0"},
+    "candidateId": {"type":"string","format":"uuid"},
     "createdAt": {"type":"string","format":"date-time"},
+    "expiresAt": {"type":"string","format":"date-time"},
+    "status": {"type":"string","enum":["pending_review","approved","rejected","expired"]},
     "consent": {"type":"string","enum":["granted"]},
+    "sharedConsent": {"type":"string","enum":["granted","denied"]},
     "rating": {"type":"string","enum":["useful","not-useful","mixed"]},
     "safeText": {"type":"string","maxLength":2000},
     "redactions": {"type":"array","items":{"type":"string"}}
