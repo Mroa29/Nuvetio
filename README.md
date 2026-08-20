@@ -10,15 +10,15 @@ Sitio público: <https://mroa29.github.io/Nuvetio/>
 
 ## Para usuarios
 
-1. Descarga el instalador para Windows (`Nuvetio-0.3.0-Setup.exe`) o Mac (`Nuvetio-0.3.0.pkg`) desde la release.
+1. Descarga el instalador para Windows (`Nuvetio-0.4.0-Setup.exe`) o Mac (`Nuvetio-0.4.0.pkg`) desde la release.
 2. Ábrelo y sigue `Siguiente`, `Instalar` y `Finalizar`. Puede aparecer una advertencia porque el instalador todavía no está firmado.
 3. Abre una sesión nueva de Codex CLI y escribe tu consulta normalmente. Para ampliar el equipo, activa después el complemento opcional Agent Skills y confirma escribiendo `SI`.
 
-La instalación directa en ChatGPT estará disponible después de publicar Nuvetio en su directorio de Plugins. La extensión IDE de Codex no admite plugins.
+Nuvetio ofrece adaptadores para Codex CLI/Desktop y Claude Code. La publicación directa en ChatGPT queda pendiente de revisión oficial. El video de presentación queda pendiente para una versión posterior.
 
 ## Para colaboradores
 
-El repositorio contiene el manifiesto público, las skills estáticas, el complemento opcional Agent Skills, los instaladores nativos, el sitio de documentación y las comprobaciones de distribución de Nuvetio. La versión 0.3.0 no habilita todavía backend, telemetría, conectores, MCP, cuentas de usuario ni aprendizaje compartido.
+El repositorio contiene el manifiesto público, las skills estáticas, los adaptadores Codex/Claude, el complemento opcional Agent Skills, los instaladores nativos, el catálogo de departamentos, la base local de aprendizaje consentido, el sitio de documentación y las comprobaciones de distribución de Nuvetio. La versión 0.4.0 no habilita todavía telemetría, conectores ni MCP.
 
 ```powershell
 npm test

@@ -1,6 +1,6 @@
-# Notas de la versión 0.3.0
+# Notas de la versión 0.4.0
 
-Nuvetio 0.3.0, antes AI Team Core, incorpora instaladores nativos, Agent Skills como complemento opcional y presenta visualmente el equipo de departamentos de Nuvetio.
+Nuvetio 0.4.0, antes AI Team Core, incorpora instaladores tolerantes, compatibilidad con Codex y Claude Code, Agent Skills opcional, departamentos consultivos y aprendizaje local con consentimiento. El video de presentación queda pendiente.
 
 ## Incluye
 

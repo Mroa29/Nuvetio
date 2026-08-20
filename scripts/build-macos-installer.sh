@@ -2,7 +2,7 @@
 
 set -eu
 
-VERSION="${1:-0.3.0}"
+VERSION="${1:-0.4.0}"
 OUTPUT_DIRECTORY="${2:-dist/native}"
 SCRIPT_DIRECTORY="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 REPOSITORY_ROOT="$(CDPATH= cd -- "$SCRIPT_DIRECTORY/.." && pwd)"

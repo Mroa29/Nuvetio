@@ -40,5 +40,6 @@ test("official submission handoff states the portal prerequisites and pending st
   assert.match(handoff, /skills-only/i);
   assert.match(handoff, /NOT SUBMITTED/);
   assert.match(handoff, /agent-skills/i);
-  assert.match(handoff, /0\.3\.0/);
+  assert.match(handoff, /0\.4\.0/);
+  assert.match(handoff, /Claude Code/i);
 });

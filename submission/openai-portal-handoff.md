@@ -1,7 +1,7 @@
 # Handoff para el portal oficial de OpenAI
 
 **Estado:** `NOT SUBMITTED`
-**Versión preparada:** Nuvetio 0.3.0
+**Versión preparada:** Nuvetio 0.4.0
 **Tipo:** `skills-only` (sin MCP, conectores, backend ni autenticación externa)
 
 ## Portal
@@ -22,9 +22,9 @@ La persona que envíe el plugin debe tener permiso de escritura en **Apps Manage
 - **Términos:** <https://mroa29.github.io/Nuvetio/terminos.html>
 - **Bundle y código público:** <https://github.com/Mroa29/Nuvetio/tree/main/plugins/nuvetio>
 
-Usar la descripción corta y larga de `listing.es.md`, los tres starter prompts de `starter-prompts.es.json` y los casos de `test-cases.json`. La release de referencia será <https://github.com/Mroa29/Nuvetio/releases/tag/v0.3.0> una vez publicada.
+Usar la descripción corta y larga de `listing.es.md`, los tres starter prompts de `starter-prompts.es.json` y los casos de `test-cases.json`. La release de referencia será <https://github.com/Mroa29/Nuvetio/releases/tag/v0.4.0> una vez publicada.
 
-Agent Skills se declara como complemento upstream opcional, no como infraestructura propia de Nuvetio: <https://github.com/addyosmani/agent-skills>. Su autoría y licencia MIT deben mantenerse visibles.
+Agent Skills se declara como complemento upstream opcional, no como infraestructura propia de Nuvetio: <https://github.com/addyosmani/agent-skills>. Su autoría y licencia MIT deben mantenerse visibles. El paquete incluye adaptadores para Codex y Claude Code.
 
 ## Secuencia humana
 
@@ -36,4 +36,4 @@ Agent Skills se declara como complemento upstream opcional, no como infraestruct
 6. Detenerse antes de **Submit for Review** y pedir confirmación explícita del propietario.
 7. Después de una eventual aprobación, detenerse otra vez antes de publicar; la aprobación no debe inferirse del envío.
 
-No se incluyen credenciales, tokens ni datos de usuarios en este documento. Hasta que OpenAI publique el plugin, Nuvetio debe seguir describiéndose como disponible en Codex CLI mediante instalación local; no debe prometer instalación directa en ChatGPT.
+No se incluyen credenciales, tokens ni datos de usuarios en este documento. Hasta que OpenAI publique el plugin, Nuvetio debe seguir describiéndose como disponible mediante instalación local en Codex o Claude Code; no debe prometer instalación directa en ChatGPT.
