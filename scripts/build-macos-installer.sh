@@ -15,7 +15,7 @@ PAYLOAD="$WORK_DIRECTORY/payload"
 trap 'rm -rf "$WORK_DIRECTORY"' EXIT
 mkdir -p "$PAYLOAD/Users/Shared/Nuvetio"
 
-for relative in .agents plugins installers addons packaging/LEEME-PRIMERO.txt docs/downloads/guia-rapida-nuvetio.pdf; do
+for relative in .agents plugins installers addons adapters departments learning packaging/LEEME-PRIMERO.txt docs/downloads/guia-rapida-nuvetio.pdf; do
   source="$REPOSITORY_ROOT/$relative"
   [ -e "$source" ] || { echo "Falta el payload requerido: $relative" >&2; exit 1; }
   destination="$PAYLOAD/Users/Shared/Nuvetio/$relative"
