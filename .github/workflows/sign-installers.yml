@@ -1,0 +1,30 @@
+name: Sign native installers (gated)
+
+on:
+  workflow_dispatch:
+    inputs:
+      artifact_run_id:
+        description: "Run ID that produced the v0.4.0 installers"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  signing-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check signing prerequisites without exposing secrets
+        env:
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_NOTARY_KEY: ${{ secrets.APPLE_NOTARY_KEY }}
+          WINDOWS_CERTIFICATE: ${{ secrets.WINDOWS_CERTIFICATE }}
+        run: |
+          if [ -z "$APPLE_CERTIFICATE" ] || [ -z "$APPLE_NOTARY_KEY" ] || [ -z "$WINDOWS_CERTIFICATE" ]; then
+            echo "UNSIGNED: certificate and notarization secrets are not configured; no artifact will be labeled signed."
+            exit 0
+          fi
+          echo "Signing prerequisites are present. A maintainer must add the verified signing commands before enabling publication."
+          exit 1

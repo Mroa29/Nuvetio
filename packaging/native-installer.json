@@ -6,11 +6,20 @@
   ],
   "runtimes": ["codex-cli", "codex-desktop", "claude-code"],
   "video": "DEFERRED",
+  "signing": {
+    "status": "UNSIGNED",
+    "macos": "requires Developer ID certificate and notarization credentials",
+    "windows": "requires Authenticode certificate and timestamp service",
+    "policy": "fail closed when credentials are absent; never label an artifact signed without verification"
+  },
   "payload": [
     ".agents",
     "plugins",
     "installers",
     "addons",
+    "adapters",
+    "departments",
+    "learning",
     "packaging/LEEME-PRIMERO.txt",
     "docs/downloads/guia-rapida-nuvetio.pdf"
   ],
