@@ -10,9 +10,9 @@ para publicar una nueva release.
 
 Convertir Nuvetio en una distribución portable y sencilla para usuarios de
 Codex y Claude Code, con instaladores que no fallen por dependencias ausentes,
-un equipo ampliado de departamentos, video de presentación local y un sistema
-de aprendizaje compartido anonimizado que nunca modifique un modelo de forma
-automática.
+un equipo ampliado de departamentos y un sistema de aprendizaje compartido
+anonimizado que nunca modifique un modelo de forma automática. El video de
+presentación queda explícitamente fuera de esta primera versión de mercado.
 
 ## Alcance de v0.4.0
 
@@ -103,9 +103,11 @@ feedback local y cola exportable. El backend público, retención, autenticació
 control de acceso y despliegue requieren credenciales y una política de
 privacidad aprobada; no se simulará que están activos si no lo están.
 
-### 6. Video de presentación
+### 6. Video de presentación (pendiente posterior a v0.4.0)
 
-- Video local de 55–60 segundos, 16:9, H.264/AAC.
+- El video no se implementará ni publicará en v0.4.0; se conserva el plan para
+  una versión posterior.
+- Video local futuro de 55–60 segundos, 16:9, H.264/AAC.
 - Narración real de Marcos; la grabación fuente permanecerá fuera de Git.
 - Seis escenas ilustradas originales, animaciones, subtítulos incrustados y
   pista WebVTT equivalente.
@@ -164,7 +166,7 @@ una copia divergente de la lógica de orquestación.
 - Nuvetio y Agent Skills funcionan independientemente.
 - La página muestra el diagrama de diez departamentos y sus límites.
 - Consentimiento, redacción y feedback tienen pruebas automatizadas.
-- Video cumple duración, codec, captions, poster, responsive y tamaño acordado.
+- El video permanece pendiente y no se presenta como disponible en la página.
 - `npm test`, `npm run validate`, revisión de diff y pruebas de instalación
   aisladas pasan antes de cualquier publicación.
 - La release no se publica como firmada ni disponible en ChatGPT hasta contar
