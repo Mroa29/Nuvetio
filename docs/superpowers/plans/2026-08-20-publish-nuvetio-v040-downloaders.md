@@ -1,4 +1,4 @@
-+# Publish Nuvetio v0.4.0 Downloaders Implementation Plan
+# Publish Nuvetio v0.4.0 Downloaders Implementation Plan
 
 > **For agentic workers:** Execute the release steps in order and verify each external artifact before claiming completion.
 
@@ -35,23 +35,22 @@
 **Files:**
 - No source changes; use the existing CI workflow.
 
-- [ ] Create and push annotated tag `v0.4.0` at the verified `main` commit.
-- [ ] Wait for the tag-triggered workflow to complete successfully.
-- [ ] Download the Windows and macOS installer artifacts and their SHA-256 files.
+- [x] Create and push annotated tag `v0.4.0` at the verified `main` commit.
+- [x] Wait for the tag-triggered workflow to complete successfully.
+- [x] Download the Windows and macOS installer artifacts and their SHA-256 files.
 
 ### Task 3: Publish release assets
 
 **Files:**
 - Read: `submission/release-notes.md`
 
-- [ ] Create the public GitHub release `v0.4.0` with the canonical release notes.
-- [ ] Upload `Nuvetio-0.4.0-Setup.exe`, `Nuvetio-0.4.0-Setup.exe.sha256`, `Nuvetio-0.4.0.pkg`, and `Nuvetio-0.4.0.pkg.sha256`.
-- [ ] Preserve the unsigned-artifact disclosure from the release notes.
+- [x] Create the public GitHub release `v0.4.0` with the canonical release notes.
+- [x] Upload `Nuvetio-0.4.0-Setup.exe`, `Nuvetio-0.4.0-Setup.exe.sha256`, `Nuvetio-0.4.0.pkg`, and `Nuvetio-0.4.0.pkg.sha256`.
+- [x] Preserve the unsigned-artifact disclosure from the release notes.
 
 ### Task 4: Verify download flow
 
-- [ ] Run `npm test`, `npm run validate`, and `git diff --check`.
-- [ ] Request both public installer URLs and require HTTP 302/200 with the expected filenames.
-- [ ] Request the guide URL and require HTTP 200 with `application/pdf`.
-- [ ] Verify GitHub Pages exposes the unchanged links and leave `main` clean and synchronized with `origin/main`.
-
+- [x] Run `npm test`, `npm run validate`, and `git diff --check`.
+- [x] Request both public installer URLs and require HTTP 302/200 with the expected filenames.
+- [x] Request the guide URL and require HTTP 200 with `application/pdf`.
+- [x] Verify GitHub Pages exposes the unchanged links and leave `main` clean and synchronized with `origin/main`.
