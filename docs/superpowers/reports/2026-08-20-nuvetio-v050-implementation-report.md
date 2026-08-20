@@ -28,6 +28,11 @@
 - The Worker has not been deployed to a Cloudflare account; it requires the owner's D1 database, Wrangler configuration and encrypted review secret.
 - No real user data has been sent anywhere.
 - The official ChatGPT portal submission has not been performed; status remains `NOT SUBMITTED`.
-- The public package/release remains v0.4.0 until this v0.5 branch is reviewed and intentionally released.
+- At the time of this implementation report, the public package/release remained v0.4.0 until the v0.5 branch was reviewed and intentionally released.
 - No automatic model training or skill mutation exists.
+
+## Release follow-up
+
+- The reviewed v0.5.0 contract was subsequently committed as `47fba84`, pushed to `main`, tagged `v0.5.0` and published at <https://github.com/Mroa29/Nuvetio/releases/tag/v0.5.0>.
+- The release includes the Windows and macOS installers, SHA-256 files and the quick-start PDF. The artifacts remain unsigned until the documented certificates and notarization steps are completed.
 
