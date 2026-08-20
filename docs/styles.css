@@ -78,6 +78,21 @@ footer nav { width: auto; margin: 0; padding: 0; }
 .team-diagram figcaption strong { font-size: 1.15rem; }
 .team-diagram figcaption span { color: #52627c; }
 .team-diagram img { display: block; width: 100%; height: auto; border-radius: .75rem; }
+.team-diagram--visual { overflow: hidden; background: #071536; border-color: #2f70c8; }
+.team-diagram--visual figcaption { color: var(--white); }
+.team-diagram--visual figcaption span { color: #d9e9ff; }
+.team-diagram--visual img { box-shadow: 0 .9rem 2rem #07153666; }
+.team-diagram-details { margin-top: 1rem; }
+.team-diagram-details summary { width: fit-content; color: var(--blue); cursor: pointer; font-weight: 800; }
+dialog { width: min(34rem, calc(100% - 2rem)); padding: 0; color: var(--text); background: transparent; border: 0; border-radius: 1.1rem; box-shadow: 0 1.5rem 4rem #08163266; }
+dialog::backdrop { background: #081632b8; backdrop-filter: blur(3px); }
+.download-dialog__card { padding: 1.5rem; background: var(--white); border: 2px solid #a9c9ee; border-radius: 1.1rem; }
+.download-dialog__card h2 { margin: .25rem 0 .65rem; font-size: clamp(1.55rem, 4vw, 2.1rem); }
+.download-dialog__card p { margin-block: .55rem; }
+.download-dialog__note { padding: .75rem; color: #5e4500; background: #fff5dc; border-left: 4px solid #e6b94a; border-radius: .55rem; font-size: .92rem; }
+.download-dialog__actions { display: flex; flex-wrap: wrap; gap: .65rem; align-items: center; margin-top: 1.1rem; }
+.download-dialog__actions .button { border: 0; cursor: pointer; font: inherit; }
+.download-dialog__close { padding: .55rem .4rem; color: #52627c; background: transparent; border: 0; cursor: pointer; font: inherit; text-decoration: underline; }
 @media (max-width: 720px) {
   .hero__content { padding-top: 2rem; }
   .grid, .steps { grid-template-columns: 1fr; }
@@ -89,5 +104,8 @@ footer nav { width: auto; margin: 0; padding: 0; }
   .department { min-height: auto; }
   .team-diagram { padding: .5rem; overflow-x: auto; }
   .team-diagram img { min-width: 680px; }
+  .team-diagram--visual img { min-width: 0; }
+  .download-dialog__actions { align-items: stretch; flex-direction: column; }
+  .download-dialog__actions .button, .download-dialog__close { width: 100%; text-align: center; }
   footer { flex-direction: column; }
 }
