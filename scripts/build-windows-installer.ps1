@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [string] $Version = '0.3.0',
+    [string] $Version = '0.4.0',
     [string] $OutputDirectory = (Join-Path $PSScriptRoot '..\..\dist\native')
 )
 
@@ -12,6 +12,9 @@ $payloadFiles = @(
     'plugins',
     'installers',
     'addons',
+    'adapters',
+    'departments',
+    'learning',
     'packaging\LEEME-PRIMERO.txt',
     'docs\downloads\guia-rapida-nuvetio.pdf'
 )
@@ -46,7 +49,7 @@ try {
     }
 
     $payloadZip = Join-Path $staging 'payload.zip'
-    Compress-Archive -Path (Join-Path $staging '.agents'), (Join-Path $staging 'plugins'), (Join-Path $staging 'installers'), (Join-Path $staging 'addons'), (Join-Path $staging 'packaging'), (Join-Path $staging 'docs') -DestinationPath $payloadZip -CompressionLevel Optimal
+    Compress-Archive -Path (Join-Path $staging '.agents'), (Join-Path $staging 'plugins'), (Join-Path $staging 'installers'), (Join-Path $staging 'addons'), (Join-Path $staging 'adapters'), (Join-Path $staging 'departments'), (Join-Path $staging 'learning'), (Join-Path $staging 'packaging'), (Join-Path $staging 'docs') -DestinationPath $payloadZip -CompressionLevel Optimal
 
     @'
 @echo off

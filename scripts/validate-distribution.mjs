@@ -11,6 +11,7 @@ export const REQUIRED_FILES = [
   "content/public-copy.es.json",
   "docs/assets/logo-nuvetio-1024.png",
   "docs/assets/mascot-nuvetio.svg",
+  "docs/assets/nuvetio-departments.svg",
   "docs/downloads/guia-rapida-nuvetio.pdf",
   "docs/guia-rapida.html",
   "docs/index.html",
@@ -26,11 +27,25 @@ export const REQUIRED_FILES = [
   "plugins/nuvetio/skills/operate-nuvetio/references/experience-and-mockups.md",
   "plugins/nuvetio/skills/operate-nuvetio/references/delivery-and-quality.md",
   "addons/agent-skills.json",
+  "addons/agent-skills/manifest.json",
+  "addons/agent-skills/README.md",
+  "addons/agent-skills/installers/claude/README.md",
+  "adapters/claude/CLAUDE.md",
+  "adapters/claude/skills/nuvetio/SKILL.md",
+  "departments/nuvetio-departments.json",
+  "learning/schema.json",
+  "learning/consent.mjs",
+  "learning/redact.mjs",
+  "learning/feedback.mjs",
+  "learning/queue.mjs",
+  "learning/README.md",
   "packaging/native-installer.json",
+  "packaging/signing/README.md",
   "packaging/macos/postinstall",
   "scripts/build-windows-installer.ps1",
   "scripts/build-macos-installer.sh",
   ".github/workflows/build-installers.yml",
+  ".github/workflows/sign-installers.yml",
   "installers/macos/Instalar-Agent-Skills.command",
   "installers/windows/Instalar-Agent-Skills.ps1",
   "installers/windows/Instalar-Agent-Skills.cmd",
@@ -334,7 +349,7 @@ export async function validateDistribution(
       errors.push(display(root, manifestPath) + ": manifest must be a JSON object");
     } else if (manifest !== undefined) {
       if (manifest.name !== "nuvetio") errors.push("Manifest name must be 'nuvetio'");
-      if (manifest.version !== "0.3.0") errors.push("Manifest version must be '0.3.0'");
+      if (manifest.version !== "0.4.0") errors.push("Manifest version must be '0.4.0'");
       if (manifest.skills !== "./skills/") errors.push("Manifest skills must be './skills/'");
       if ("mcpServers" in manifest) errors.push("Manifest must not declare mcpServers");
       const copyPath = path.join(root, "content/public-copy.es.json");
