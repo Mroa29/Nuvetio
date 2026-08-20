@@ -82,6 +82,9 @@ footer nav { width: auto; margin: 0; padding: 0; }
 .team-diagram--visual figcaption { color: var(--white); }
 .team-diagram--visual figcaption span { color: #d9e9ff; }
 .team-diagram--visual img { box-shadow: 0 .9rem 2rem #07153666; }
+.team-visual-mascot { position: relative; overflow: hidden; line-height: 0; border-radius: .75rem; background: #071536; }
+.team-visual-mascot__overlay { position: absolute; z-index: 1; top: 50%; left: 50%; width: 29%; aspect-ratio: 1 / 1; transform: translate(-50%, -49%); display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle, #071536 0 58%, #071536e8 68%, transparent 79%); }
+.team-visual-mascot__overlay img { width: 118%; height: auto; box-shadow: none; filter: drop-shadow(0 .7rem 1rem #020a1dcc); }
 .team-diagram-details { margin-top: 1rem; }
 .team-diagram-details summary { width: fit-content; color: var(--blue); cursor: pointer; font-weight: 800; }
 dialog { width: min(34rem, calc(100% - 2rem)); padding: 0; color: var(--text); background: transparent; border: 0; border-radius: 1.1rem; box-shadow: 0 1.5rem 4rem #08163266; }
@@ -105,6 +108,7 @@ dialog::backdrop { background: #081632b8; backdrop-filter: blur(3px); }
   .team-diagram { padding: .5rem; overflow-x: auto; }
   .team-diagram img { min-width: 680px; }
   .team-diagram--visual img { min-width: 0; }
+  .team-visual-mascot__overlay { width: 36%; }
   .download-dialog__actions { align-items: stretch; flex-direction: column; }
   .download-dialog__actions .button, .download-dialog__close { width: 100%; text-align: center; }
   footer { flex-direction: column; }
