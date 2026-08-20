@@ -3,10 +3,7 @@ setlocal
 
 where codex >nul 2>&1
 if errorlevel 1 (
-  echo No se pudo instalar Nuvetio: no encontramos Codex CLI.
-  echo Instala Codex y vuelve a ejecutar este archivo.
-  if not "%NUVETIO_INSTALL_NONINTERACTIVE%"=="1" pause
-  exit /b 1
+  echo Codex CLI no esta instalado; continuaremos sin el y revisaremos Claude Code.
 )
 
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0Instalar-Nuvetio.ps1"
