@@ -1,0 +1,14 @@
+name = "nuvetio-learning"
+main = "src/index.mjs"
+compatibility_date = "2026-08-20"
+
+[triggers]
+crons = ["0 3 * * *"]
+
+[[d1_databases]]
+binding = "LEARNING_DB"
+database_name = "nuvetio-learning"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[vars]
+# Configure NUVETIO_REVIEW_TOKEN as an encrypted secret, not in this file.
