@@ -10,7 +10,7 @@ export const REQUIRED_FILES = [
   "README.md",
   "content/public-copy.es.json",
   "docs/assets/logo-nuvetio-1024.png",
-  "docs/assets/mascot-nuvetio.svg",
+  "docs/assets/mascot-nuvetio.png",
   "docs/assets/nuvetio-departments.svg",
   "docs/downloads/guia-rapida-nuvetio.pdf",
   "docs/guia-rapida.html",
