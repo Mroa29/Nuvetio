@@ -1,0 +1,13 @@
+{
+  "version": "0.4.0",
+  "record": "nuvetio-feedback-candidate",
+  "required": ["schemaVersion", "createdAt", "consent", "rating", "safeText", "redactions"],
+  "properties": {
+    "schemaVersion": {"type":"string","const":"0.4.0"},
+    "createdAt": {"type":"string","format":"date-time"},
+    "consent": {"type":"string","enum":["granted"]},
+    "rating": {"type":"string","enum":["useful","not-useful","mixed"]},
+    "safeText": {"type":"string","maxLength":2000},
+    "redactions": {"type":"array","items":{"type":"string"}}
+  }
+}
