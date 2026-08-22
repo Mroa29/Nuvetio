@@ -33,6 +33,18 @@ main { padding: 2rem 1.25rem 4rem; }
 section { padding-block: 2rem; }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 article, .example, .steps li { background: var(--surface); border: 1px solid #dbe3f0; border-radius: .85rem; padding: 1rem; }
+.selection-panel { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.35fr); gap: 1.25rem; align-items: start; margin-block: 1rem; padding: 1.25rem; background: linear-gradient(135deg, #eef8ff, #f7fbff); border: 1px solid #cfe0f4; border-radius: 1rem; }
+.selection-panel h2 { margin: .25rem 0 .65rem; }
+.selection-panel__body { display: grid; gap: 1rem; }
+.selection-panel__choices { display: flex; flex-wrap: wrap; gap: .65rem; }
+.selection-chip { padding: .72rem .95rem; color: var(--navy); background: var(--white); border: 1px solid #b9c7dc; border-radius: 999px; cursor: pointer; font: inherit; font-weight: 800; box-shadow: 0 .45rem 1rem #0816320d; }
+.selection-chip:hover { border-color: var(--blue); }
+.selection-chip:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+.selection-chip[aria-pressed="true"] { color: var(--white); background: var(--blue); border-color: var(--blue); }
+.selection-preview { padding: 1rem; background: var(--white); border: 1px solid #dbe3f0; border-radius: .85rem; }
+.selection-preview strong { display: block; color: var(--navy); }
+.selection-preview p { margin: .35rem 0 0; }
+.selection-panel__continue { width: fit-content; grid-column: 2; border: 0; cursor: pointer; font: inherit; }
 .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 0; list-style-position: inside; }
 blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 4px solid var(--blue); font-size: 1.1rem; }
 footer { display: flex; justify-content: space-between; gap: 1rem; padding: 2rem 1.25rem; border-top: 1px solid #dbe3f0; }
@@ -96,6 +108,8 @@ dialog::backdrop { background: #081632b8; backdrop-filter: blur(3px); }
 @media (max-width: 720px) {
   .hero__content { padding-top: 2rem; }
   .grid, .steps { grid-template-columns: 1fr; }
+  .selection-panel { grid-template-columns: 1fr; }
+  .selection-panel__continue { width: 100%; grid-column: auto; text-align: center; }
   .nav-links { gap: .6rem; font-size: .9rem; }
   .hero-mascot { margin-inline: auto; }
   .orchestrator { align-items: flex-start; }

@@ -29,6 +29,28 @@
       <article><p>Incorpora pruebas, calidad, seguridad y revisión de riesgos.</p></article>
       <article><p>Mejora tus resultados sin obligarte a aprender prompting avanzado.</p></article>
     </div></section>
+    <section id="seleccion-guiada" class="selection-panel" aria-labelledby="selection-title">
+      <div>
+        <p class="section-kicker">Menos tiempo, menos tokens</p>
+        <h2 id="selection-title">Elige el apoyo que necesitas</h2>
+        <p>Nuvetio primero confirma tu solicitud y te recomienda solo los apoyos necesarios. Puedes usar la recomendación o ajustar la selección antes de profundizar.</p>
+      </div>
+      <div class="selection-panel__body">
+        <div class="selection-panel__choices" aria-label="Apoyos disponibles">
+          <button class="selection-chip" type="button" data-agent-selection="recommended" aria-pressed="false">Usar recomendados</button>
+          <button class="selection-chip" type="button" data-agent-selection="producto" aria-pressed="false">Producto</button>
+          <button class="selection-chip" type="button" data-agent-selection="marketing" aria-pressed="false">Ventas y Marketing</button>
+          <button class="selection-chip" type="button" data-agent-selection="experiencia" aria-pressed="false">Experiencia y mockups</button>
+          <button class="selection-chip" type="button" data-agent-selection="finanzas" aria-pressed="false">Finanzas</button>
+          <button class="selection-chip" type="button" data-agent-selection="legal" aria-pressed="false">Legal</button>
+        </div>
+        <div class="selection-preview" id="selection-preview" aria-live="polite">
+          <strong>Ejemplo de validación</strong>
+          <p>Si quieres vender mejor tu software, Nuvetio puede sugerir Ventas y Marketing + Producto. Antes de avanzar, te muestra un ejemplo breve para confirmar que esa selección resuelve tu necesidad.</p>
+        </div>
+      </div>
+      <button id="selection-continue" class="button selection-panel__continue" type="button">Continuar con estos apoyos</button>
+    </section>
     <section id="equipo" class="team" aria-labelledby="team-title">
       <div class="team__intro">
         <p class="section-kicker">El equipo detrás de Nuvetio</p>
@@ -79,5 +101,6 @@
     </div>
   </dialog>
   <script src="./download-dialog.js" defer></script>
+  <script src="./guided-selection.js" defer></script>
 </body>
 </html>
